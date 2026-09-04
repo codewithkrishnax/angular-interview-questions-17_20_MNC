@@ -1,0 +1,3031 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular Interview Questions & Answers – Kishore</title>
+    <style>
+      /*@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');*/
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+      body {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 10.5px;
+        line-height: 1.55;
+        color: #1c1c2e;
+        background: #e8ecf3;
+      }
+      /* ─── PAGE ─── */
+      .page {
+        /*width:210mm;*/
+        min-height: 297mm;
+        background: white;
+        margin: 8mm auto;
+        padding: 14mm 16mm 18mm;
+        box-shadow: 0 6px 30px rgba(0, 0, 0, .12);
+        position: relative;
+        overflow: hidden;
+      }
+      @media print {
+        body {
+          background: white
+        }
+        .page {
+          margin: 0;
+          box-shadow: none;
+          page-break-after: always;
+          break-after: page
+        }
+      }
+      /* ─── COVER PAGE ─── */
+      .cover {
+        background: linear-gradient(145deg, #0a0a23 0%, #111136 40%, #1a0a3d 70%, #0d1b4b 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        min-height: 297mm;
+        padding: 20mm;
+      }
+      .cover::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(99, 102, 241, .25) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .cover-eyebrow {
+        background: rgba(99, 102, 241, .3);
+        border: 1px solid rgba(99, 102, 241, .5);
+        border-radius: 20px;
+        padding: 5px 16px;
+        font-size: 9px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        font-family: 'Syne', sans-serif;
+        margin-bottom: 22px;
+        color: rgba(255, 255, 255, .85);
+      }
+      .cover-title {
+        font-family: 'Syne', sans-serif;
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 8px;
+      }
+      .cover-title .accent {
+        background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .cover-subtitle {
+        font-size: 13px;
+        color: rgba(255, 255, 255, .6);
+        margin-bottom: 36px;
+        font-weight: 300;
+      }
+      .cover-stats {
+        display: flex;
+        gap: 20px;
+        margin: 20px 0
+      }
+      .stat-box {
+        background: rgba(255, 255, 255, .07);
+        border: 1px solid rgba(255, 255, 255, .12);
+        border-radius: 14px;
+        padding: 16px 22px;
+        backdrop-filter: blur(8px);
+      }
+      .stat-number {
+        font-family: 'Syne', sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .stat-label {
+        font-size: 8.5px;
+        opacity: .55;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-top: 2px
+      }
+      .cover-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        justify-content: center;
+        margin-top: 28px;
+        max-width: 400px
+      }
+      .ctag {
+        background: rgba(255, 255, 255, .08);
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 5px;
+        padding: 3px 10px;
+        font-size: 9px;
+        color: rgba(255, 255, 255, .75);
+      }
+      .cover-author {
+        position: absolute;
+        bottom: 16mm;
+        font-size: 9px;
+        color: rgba(255, 255, 255, .35);
+        letter-spacing: 1px;
+      }
+      /* ─── PAGE HEADER / FOOTER ─── */
+      .ph {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1.5px solid #e5e9f5;
+        padding-bottom: 8px;
+        margin-bottom: 14px;
+      }
+      .ph-logo {
+        font-family: 'Syne', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        color: #4338ca;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .ph-section {
+        font-size: 8.5px;
+        color: #94a3b8;
+        letter-spacing: .8px;
+        text-transform: uppercase
+      }
+      .pf {
+        position: absolute;
+        bottom: 8mm;
+        left: 16mm;
+        right: 16mm;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #e8ecf5;
+        padding-top: 5px;
+        font-size: 7.5px;
+        color: #aab4c8;
+      }
+      /* ─── INDEX PAGE ─── */
+      .idx-title {
+        font-family: 'Syne', sans-serif;
+        font-size: 24px;
+        font-weight: 800;
+        color: #1c1c2e;
+        margin-bottom: 3px;
+      }
+      .idx-title span {
+        color: #4338ca
+      }
+      .idx-sub {
+        font-size: 9.5px;
+        color: #64748b;
+        margin-bottom: 18px
+      }
+      .idx-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9px
+      }
+      .idx-cat {
+        background: #fafbff;
+        border: 1px solid #e5e9f5;
+        border-left: 3px solid #4338ca;
+        border-radius: 7px;
+        padding: 9px 11px;
+      }
+      .idx-cat.alt {
+        border-left-color: #7c3aed
+      }
+      .idx-cat.alt2 {
+        border-left-color: #be185d
+      }
+      .idx-cat.alt3 {
+        border-left-color: #0891b2
+      }
+      .idx-cat h3 {
+        font-family: 'Syne', sans-serif;
+        font-size: 10px;
+        color: #1c1c2e;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .idx-cat .qr {
+        font-size: 8px;
+        color: #4338ca;
+        font-weight: 600;
+        margin-bottom: 4px
+      }
+      .idx-cat ul {
+        list-style: none
+      }
+      .idx-cat ul li {
+        font-size: 8.5px;
+        color: #475569;
+        padding: 1px 0;
+        display: flex;
+        gap: 4px;
+        align-items: flex-start;
+      }
+      .idx-cat ul li::before {
+        content: '›';
+        color: #4338ca;
+        font-weight: 700;
+        flex-shrink: 0
+      }
+      /* ─── SECTION HEADER ─── */
+      .sec-hdr {
+        background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
+        color: white;
+        border-radius: 8px;
+        padding: 9px 14px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .sec-hdr.green {
+        background: linear-gradient(135deg, #065f46, #047857)
+      }
+      .sec-hdr.purple {
+        background: linear-gradient(135deg, #581c87, #7c3aed)
+      }
+      .sec-hdr.teal {
+        background: linear-gradient(135deg, #0e7490, #0891b2)
+      }
+      .sec-hdr.rose {
+        background: linear-gradient(135deg, #9f1239, #be185d)
+      }
+      .sec-hdr.amber {
+        background: linear-gradient(135deg, #92400e, #b45309)
+      }
+      .sec-hdr.slate {
+        background: linear-gradient(135deg, #1e293b, #334155)
+      }
+      .sec-ico {
+        width: 28px;
+        height: 28px;
+        background: rgba(255, 255, 255, .2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .sec-hdr h2 {
+        font-family: 'Syne', sans-serif;
+        font-size: 12px;
+        font-weight: 700
+      }
+      .sec-cnt {
+        margin-left: auto;
+        background: rgba(255, 255, 255, .2);
+        border-radius: 10px;
+        padding: 2px 9px;
+        font-size: 8px;
+      }
+      /* ─── Q&A CARD ─── */
+      .qa {
+        border: 1px solid #e5e9f5;
+        border-radius: 8px;
+        margin-bottom: 9px;
+        overflow: hidden;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .q-head {
+        background: linear-gradient(90deg, #f0f2ff, #f5f0ff);
+        padding: 7px 11px;
+        border-left: 3px solid #4338ca;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .q-num {
+        background: #4338ca;
+        color: white;
+        width: 19px;
+        height: 19px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8.5px;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 1px;
+        font-family: 'Syne', sans-serif;
+      }
+      .q-txt {
+        font-size: 10.5px;
+        font-weight: 600;
+        color: #1e1b4b;
+        line-height: 1.4
+      }
+      .ans {
+        padding: 8px 11px;
+        background: white
+      }
+      .ans p {
+        font-size: 10px;
+        color: #334155;
+        line-height: 1.6;
+        margin-bottom: 5px
+      }
+      .ans p:last-child {
+        margin-bottom: 0
+      }
+      .ans strong {
+        color: #1e1b4b
+      }
+      .ans code {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 3px;
+        padding: 1px 4px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 8.5px;
+        color: #7c3aed;
+      }
+      .ans pre {
+        background: #0f0f23;
+        color: #c9d1d9;
+        border-radius: 7px;
+        padding: 8px 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 8px;
+        margin: 5px 0;
+        overflow: hidden;
+        line-height: 1.55;
+        border-left: 3px solid #4338ca;
+      }
+      .ans pre .kw {
+        color: #c084fc
+      }
+      .ans pre .fn {
+        color: #7dd3fc
+      }
+      .ans pre .str {
+        color: #86efac
+      }
+      .ans pre .cm {
+        color: #6b7280
+      }
+      .kp {
+        background: #fef3c7;
+        border-left: 3px solid #f59e0b;
+        padding: 5px 8px;
+        border-radius: 0 5px 5px 0;
+        font-size: 9.5px;
+        color: #92400e;
+        margin: 4px 0;
+      }
+      .tip {
+        background: #ecfdf5;
+        border-left: 3px solid #10b981;
+        padding: 5px 8px;
+        border-radius: 0 5px 5px 0;
+        font-size: 9.5px;
+        color: #065f46;
+        margin: 4px 0;
+      }
+      .warn {
+        background: #fef2f2;
+        border-left: 3px solid #ef4444;
+        padding: 5px 8px;
+        border-radius: 0 5px 5px 0;
+        font-size: 9.5px;
+        color: #7f1d1d;
+        margin: 4px 0;
+      }
+      .diff {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 9px;
+        margin: 5px 0;
+      }
+      .diff th {
+        background: #4338ca;
+        color: white;
+        padding: 4px 7px;
+        text-align: left;
+        font-weight: 600;
+      }
+      .diff td {
+        border: 1px solid #e5e9f5;
+        padding: 3.5px 7px;
+        vertical-align: top;
+      }
+      .diff tr:nth-child(even) td {
+        background: #f8faff
+      }
+      ul.alist {
+        padding-left: 14px;
+        margin: 4px 0
+      }
+      ul.alist li {
+        font-size: 10px;
+        color: #334155;
+        margin-bottom: 2px
+      }
+      /* ─── CREDITS PAGE ─── */
+      .credits {
+        background: linear-gradient(145deg, #0a0a23, #1a0a3d 60%, #0d1b4b);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        min-height: 297mm;
+      }
+      .credits::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(99, 102, 241, .2) 0%, transparent 70%);
+      }
+      .cred-av {
+        width: 90px;
+        height: 90px;
+        background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+        margin-bottom: 18px;
+        border: 3px solid rgba(255, 255, 255, .2);
+        position: relative;
+        z-index: 1;
+      }
+      .cred-name {
+        font-family: 'Syne', sans-serif;
+        font-size: 36px;
+        font-weight: 800;
+        position: relative;
+        z-index: 1;
+      }
+      .cred-subtitle {
+        font-size: 12px;
+        color: rgba(255, 255, 255, .55);
+        margin: 6px 0 24px;
+        position: relative;
+        z-index: 1;
+      }
+      .cred-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: relative;
+        z-index: 1
+      }
+      .cred-link {
+        background: rgba(255, 255, 255, .1);
+        border: 1px solid rgba(255, 255, 255, .2);
+        border-radius: 25px;
+        padding: 9px 22px;
+        font-size: 10px;
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        transition: background .2s;
+      }
+      .cred-link:hover {
+        background: rgba(255, 255, 255, .2)
+      }
+      .cred-desc {
+        max-width: 380px;
+        font-size: 9.5px;
+        color: rgba(255, 255, 255, .45);
+        line-height: 1.7;
+        margin-top: 22px;
+        position: relative;
+        z-index: 1;
+      }
+      .cred-badge {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+      .cred-b {
+        background: rgba(99, 102, 241, .25);
+        border: 1px solid rgba(99, 102, 241, .4);
+        border-radius: 20px;
+        padding: 4px 14px;
+        font-size: 8.5px;
+        color: rgba(255, 255, 255, .7);
+      }
+      .cred-foot {
+        position: absolute;
+        bottom: 14mm;
+        font-size: 8px;
+        color: rgba(255, 255, 255, .25);
+        z-index: 1;
+        letter-spacing: 1px;
+      }
+      /* ─── TIME ESTIMATE CARD ─── */
+      .time-card {
+        background: linear-gradient(90deg, #fef3c7, #fff7ed);
+        border: 1px solid #fde68a;
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .time-card .ti {
+        font-size: 22px
+      }
+      .time-card .tinfo {
+        flex: 1
+      }
+      .time-card .tinfo strong {
+        font-family: 'Syne', sans-serif;
+        font-size: 11px;
+        color: #92400e;
+        display: block
+      }
+      .time-card .tinfo span {
+        font-size: 9px;
+        color: #b45309
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════════════════════════ -->
+    <div class="page cover">
+      <div class="cover-eyebrow">🚀 MNC Interview Preparation Guide • 2025 Edition</div>
+      <div class="cover-title">Angular Interview
+        <br><span class="accent">Questions & Answers</span>
+      </div>
+      <div class="cover-subtitle">128 unique questions · 15 topic areas · 4–12 years experience level</div>
+      <div class="cover-stats">
+        <div class="stat-box">
+          <div class="stat-number">128</div>
+          <div class="stat-label">Unique Questions</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">15</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Real MNC Asked</div>
+        </div>
+      </div>
+      <div class="cover-tags">
+        <span class="ctag">Angular 17+</span><span class="ctag">Signals</span>
+        <span class="ctag">RxJS / Operators</span><span class="ctag">NgRx</span>
+        <span class="ctag">Change Detection</span><span class="ctag">HTTP Interceptors</span>
+        <span class="ctag">TypeScript</span><span class="ctag">Performance</span>
+        <span class="ctag">JWT / Auth</span><span class="ctag">Micro Frontend</span>
+        <span class="ctag">JavaScript Core</span><span class="ctag">Coding Challenges</span>
+        <span class="ctag">Standalone Architecture</span><span class="ctag">SSR / Universal</span>
+      </div>
+      <div class="cover-author">Compiled from 20+ real MNC interview posts • Curated by KISHORE</div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     INDEX PAGE
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph">
+        <span class="ph-logo">⚡ Angular Interview Guide</span>
+        <span class="ph-section">Table of Contents</span>
+      </div>
+      <div class="time-card">
+        <span class="ti">⏱️</span>
+        <div class="tinfo">
+          <strong>Estimated Study Time: 20–25 hrs to master all 128 questions</strong>
+          <span>Skim in 2–3 hrs · Moderate prep 8–10 hrs · Deep mastery (with coding) 20–25 hrs · Angular Core + Signals = highest priority for MNCs</span>
+        </div>
+      </div>
+      <div class="idx-title">📋 Table of <span>Contents</span></div>
+      <p class="idx-sub">128 unique questions compiled from 20 real LinkedIn MNC interview posts · Deduplicated · Organized by topic · With answers</p>
+      <div class="idx-grid">
+        <div class="idx-cat">
+          <h3>🏗️ 1. Angular Core Concepts</h3>
+          <div class="qr">Q1 – Q12</div>
+          <ul>
+            <li>Building blocks, Modules, Standalone</li>
+            <li>Lifecycle hooks, Lazy loading</li>
+            <li>AOT vs JIT, View Encapsulation</li>
+            <li>ng-content, ngTemplate, Tree shaking</li>
+            <li>Angular 17–20 new features</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt">
+          <h3>🔄 2. Change Detection</h3>
+          <div class="qr">Q13 – Q22</div>
+          <ul>
+            <li>Default vs OnPush strategies</li>
+            <li>Zone.js and its role</li>
+            <li>ChangeDetectorRef methods</li>
+            <li>detectChanges vs markForCheck</li>
+            <li>detach(), ApplicationRef.tick()</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt2">
+          <h3>📡 3. Angular Signals</h3>
+          <div class="qr">Q23 – Q30</div>
+          <ul>
+            <li>Signals vs RxJS / Observables</li>
+            <li>computed(), effect(), untrack()</li>
+            <li>Linked Signals, set() vs update()</li>
+            <li>Signals + Change Detection (zoneless)</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt3">
+          <h3>📦 4. Component Communication</h3>
+          <div class="qr">Q31 – Q37</div>
+          <ul>
+            <li>@Input, @Output, EventEmitter</li>
+            <li>ViewChild, ContentChild, ViewChildren</li>
+            <li>Dynamic components, ControlValueAccessor</li>
+            <li>HostListener, Renderer2, ElementRef</li>
+          </ul>
+        </div>
+        <div class="idx-cat">
+          <h3>📝 5. Forms</h3>
+          <div class="qr">Q38 – Q44</div>
+          <ul>
+            <li>Template-driven vs Reactive</li>
+            <li>setValue vs patchValue</li>
+            <li>FormArray, Multi-step wizard</li>
+            <li>Dynamic forms from JSON</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt">
+          <h3>🗺️ 6. Routing & Guards</h3>
+          <div class="qr">Q45 – Q52</div>
+          <ul>
+            <li>Guards types, CanActivate vs CanLoad</li>
+            <li>Multiple guards on single route</li>
+            <li>canDeactivate, lazy loading</li>
+            <li>Dynamic menus, permission directives</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt2">
+          <h3>💉 7. Dependency Injection</h3>
+          <div class="qr">Q53 – Q58</div>
+          <ul>
+            <li>DI hierarchy, providedIn</li>
+            <li>Singleton services in components vs modules</li>
+            <li>NgModule vs component decorator</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt3">
+          <h3>🌐 8. HTTP & Interceptors</h3>
+          <div class="qr">Q59 – Q66</div>
+          <ul>
+            <li>HTTP Interceptors, multiple interceptors</li>
+            <li>Token handling, global error handling</li>
+            <li>forkJoin vs mergeMap</li>
+            <li>Error interceptor internals</li>
+          </ul>
+        </div>
+        <div class="idx-cat">
+          <h3>🔃 9. RxJS & Observables</h3>
+          <div class="qr">Q67 – Q78</div>
+          <ul>
+            <li>Observable vs Promise</li>
+            <li>Cold vs Hot, Unicast vs Multicast</li>
+            <li>switchMap, mergeMap, concatMap, exhaustMap</li>
+            <li>Memory leaks, takeUntil, unsubscribe</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt">
+          <h3>🏪 10. State Management / NgRx</h3>
+          <div class="qr">Q79 – Q82</div>
+          <ul>
+            <li>NgRx actions, reducers, effects</li>
+            <li>Store vs shared services</li>
+            <li>Subject vs BehaviorSubject scenarios</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt2">
+          <h3>⚡ 11. Performance Optimization</h3>
+          <div class="qr">Q83 – Q88</div>
+          <ul>
+            <li>TrackBy, virtual scrolling</li>
+            <li>Lighthouse, LCP, FCP, PageSpeed</li>
+            <li>Pagination, duplicate submissions</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt3">
+          <h3>🏛️ 12. Architecture & Advanced</h3>
+          <div class="qr">Q89 – Q96</div>
+          <ul>
+            <li>Micro frontend, Module Federation</li>
+            <li>Angular Universal vs SSR</li>
+            <li>Angular migration, i18n, CI/CD</li>
+          </ul>
+        </div>
+        <div class="idx-cat">
+          <h3>🔐 13. Authentication & Security</h3>
+          <div class="qr">Q97 – Q102</div>
+          <ul>
+            <li>JWT flow, OAuth 2.0</li>
+            <li>Access & Refresh tokens</li>
+            <li>Role-based access control</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt">
+          <h3>💛 14. JavaScript Fundamentals</h3>
+          <div class="qr">Q103 – Q116</div>
+          <ul>
+            <li>Closure, Hoisting, Event loop</li>
+            <li>var/let/const, Arrow functions</li>
+            <li>Prototypal inheritance, Currying</li>
+            <li>Promises, async/await, ES6 features</li>
+          </ul>
+        </div>
+        <div class="idx-cat alt2">
+          <h3>💻 15. TypeScript & Coding</h3>
+          <div class="qr">Q117 – Q128</div>
+          <ul>
+            <li>any vs unknown, Generics, Partial&lt;T&gt;</li>
+            <li>Array algorithms, Flatten, Chunk</li>
+            <li>Find missing numbers, duplicates</li>
+            <li>Generator functions, splice vs slice</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pf">
+        <span>Angular Interview Questions Guide – Compiled from 20 real MNC interview experiences</span>
+        <span>Curated by Kishore</span>
+      </div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 1: ANGULAR CORE CONCEPTS  Q1–Q12
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 1 • Angular Core Concepts</span></div>
+      <div class="sec-hdr">
+        <div class="sec-ico">🏗️</div>
+        <h2>Section 1: Angular Core Concepts</h2><span class="sec-cnt">Q1 – Q12</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">1</div>
+          <div class="q-txt">What are the building blocks of Angular?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Components</strong> — Basic UI blocks with template, styles, and logic. <strong>Modules (NgModule)</strong> — Group components/directives/pipes/services (optional in Angular 17+ with standalone). <strong>Services</strong> — Shared business logic injected via DI. <strong>Directives</strong> — Extend HTML (structural: *ngIf, *ngFor; attribute: custom). <strong>Pipes</strong> — Transform template data. <strong>Routing</strong> — Navigation between views. <strong>Dependency Injection</strong> — Framework for providing and consuming services.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">2</div>
+          <div class="q-txt">What is a Module? With standalone component architecture, do we still need modules?</div>
+        </div>
+        <div class="ans">
+          <p><strong>NgModule</strong> groups declarations, imports, exports, and providers. Since Angular 14+ (default in 17+), <strong>standalone components</strong> can import dependencies directly with
+            <code>standalone: true</code>, eliminating the need for NgModules. Modules still work but are no longer required.
+          </p>
+          <div class="tip">✅ Modern Angular projects default to standalone. AppModule is replaced by bootstrapApplication() in main.ts.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">3</div>
+          <div class="q-txt">What are lifecycle hooks in Angular? List the most important ones.</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>ngOnChanges</code> — Runs when @Input changes (before ngOnInit).
+            <code>ngOnInit</code> — Runs once after component init; best place for API calls.
+            <code>ngDoCheck</code> — Every change detection cycle.
+            <code>ngAfterContentInit</code> — After ng-content projected.
+            <code>ngAfterViewInit</code> — After view + child views init; use for ViewChild access.
+            <code>ngOnDestroy</code> — Before destroy; clean up subscriptions here.
+          </p>
+          <div class="tip">✅ Most asked: ngOnInit, ngOnDestroy, ngOnChanges, ngAfterViewInit</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">4</div>
+          <div class="q-txt">What is data binding in Angular? Explain all types.</div>
+        </div>
+        <div class="ans">
+          <p><strong>Interpolation:</strong>
+            <code>{{ value }}</code> — Component → Template. <strong>Property binding:</strong>
+            <code>[src]="url"</code> — Component → Template. <strong>Event binding:</strong>
+            <code>(click)="handler()"</code> — Template → Component. <strong>Two-way binding:</strong>
+            <code>[(ngModel)]="value"</code> — Both directions (requires FormsModule). Known as "banana in a box" syntax.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">5</div>
+          <div class="q-txt">What is lazy loading in Angular? How is it implemented?</div>
+        </div>
+        <div class="ans">
+          <p>Lazy loading loads modules/components only when the user navigates to them — reducing initial bundle size and improving startup performance.</p>
+          <pre><span class="cm">// routes.ts — loadChildren (module-based)</span>
+{ path: 'admin', loadChildren: () =>
+    import('./admin/admin.module').then(m => m.AdminModule) }
+<span class="cm">// Angular 17+ — loadComponent (standalone)</span>
+{ path: 'dashboard', loadComponent: () =>
+    import('./dashboard.component').then(c => c.DashboardComponent) }</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">6</div>
+          <div class="q-txt">What is the difference between AOT and JIT compilation?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th>Feature</th>
+              <th>AOT (Ahead of Time)</th>
+              <th>JIT (Just in Time)</th>
+            </tr>
+            <tr>
+              <td>When compiled</td>
+              <td>At build time</td>
+              <td>At runtime in browser</td>
+            </tr>
+            <tr>
+              <td>Performance</td>
+              <td>Faster rendering</td>
+              <td>Slower first load</td>
+            </tr>
+            <tr>
+              <td>Bundle size</td>
+              <td>Smaller (no compiler shipped)</td>
+              <td>Larger</td>
+            </tr>
+            <tr>
+              <td>Error detection</td>
+              <td>At build time</td>
+              <td>At runtime</td>
+            </tr>
+            <tr>
+              <td>Default</td>
+              <td>Production (Angular 9+)</td>
+              <td>Development only</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">7</div>
+          <div class="q-txt">What is View Encapsulation in Angular? Explain all three types.</div>
+        </div>
+        <div class="ans">
+          <p><strong>Emulated (default)</strong> — Angular adds unique attributes to scope CSS to the component. Styles don't leak in/out. <strong>None</strong> — No encapsulation. CSS becomes global. Use cautiously. <strong>ShadowDom</strong> — Uses browser's native Shadow DOM for true, strict style isolation.</p>
+          <div class="key-point">💡 Use Emulated for components, None only for global overrides, ShadowDom for fully isolated web components.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">8</div>
+          <div class="q-txt">What is ng-content and how does content projection work?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>ng-content</code> projects HTML from a parent into a child component's template — enabling flexible, reusable component slots.
+          </p>
+          <pre><span class="cm">&lt;!-- card.component.html --&gt;</span>
+&lt;div class="card"&gt;
+  &lt;ng-content select="[header]"&gt;&lt;/ng-content&gt;  <span class="cm">&lt;!-- named slot --&gt;</span>
+  &lt;ng-content&gt;&lt;/ng-content&gt;                    <span class="cm">&lt;!-- default slot --&gt;</span>
+&lt;/div&gt;
+<span class="cm">&lt;!-- parent --&gt;</span>
+&lt;app-card&gt;&lt;h2 header&gt;Title&lt;/h2&gt;&lt;p&gt;Body content&lt;/p&gt;&lt;/app-card&gt;</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">9</div>
+          <div class="q-txt">What is ngTemplate and ng-container? How do you pass data to ngTemplate?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>ng-template</code> — Template block not rendered by default. Rendered via ngTemplateOutlet or structural directives.
+            <code>ng-container</code> — Logical grouping without adding DOM nodes, useful for applying multiple structural directives.
+          </p>
+          <pre>&lt;ng-template #tmpl <span class="kw">let-user</span>="user"&gt;
+  &lt;p&gt;Hello {{ user.name }}&lt;/p&gt;
+&lt;/ng-template&gt;
+&lt;ng-container *ngTemplateOutlet="tmpl; context: { user: currentUser }"&gt;
+&lt;/ng-container&gt;</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">10</div>
+          <div class="q-txt">What is tree shaking in Angular?</div>
+        </div>
+        <div class="ans">
+          <p>Tree shaking removes unused code (modules, functions) from the final bundle at build time. Angular's build toolchain (webpack / esbuild in Angular 17+) statically analyzes imports and eliminates dead code.</p>
+          <div class="tip">✅ Best practice: Import only specific RxJS operators, use standalone components (more tree-shakable than NgModules), avoid barrel imports of entire libraries.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">11</div>
+          <div class="q-txt">What are Pure vs Impure Pipes? What is PipeTransform?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>PipeTransform</code> interface requires implementing
+            <code>transform(value, ...args)</code>.
+          </p>
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>Pure Pipe (default)</th>
+              <th>Impure Pipe (pure: false)</th>
+            </tr>
+            <tr>
+              <td>Re-runs when</td>
+              <td>Input reference changes</td>
+              <td>Every change detection cycle</td>
+            </tr>
+            <tr>
+              <td>Performance</td>
+              <td>Excellent (cached)</td>
+              <td>Expensive (runs constantly)</td>
+            </tr>
+            <tr>
+              <td>Use for</td>
+              <td>Immutable data / primitives</td>
+              <td>Arrays/objects with internal mutations</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">12</div>
+          <div class="q-txt">What are the new features in Angular 17 to latest versions?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Standalone components</strong> (default) — No NgModule needed. <strong>Signals</strong> — Fine-grained reactive primitives replacing zone.js dependency. <strong>New control flow</strong> —
+            <code>@if</code>,
+            <code>@for</code>,
+            <code>@switch</code> replacing *ngIf, *ngFor, ngSwitch. <strong>Deferrable views</strong> —
+            <code>@defer</code> for lazy-loading template chunks. <strong>Zoneless experiments</strong> — Running Angular without zone.js using Signals. <strong>esbuild</strong> — Much faster builds. <strong>SSR improvements</strong> — Better hydration, partial hydration. <strong>@let</strong> template variables (v18+). <strong>Signal inputs/outputs</strong> (v17.1+).
+          </p>
+        </div>
+      </div>
+      <div class="pf"><span>Section 1: Angular Core Concepts | Q1–Q12</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 2: CHANGE DETECTION  Q13–Q22
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 2 • Change Detection</span></div>
+      <div class="sec-hdr green">
+        <div class="sec-ico">🔄</div>
+        <h2>Section 2: Change Detection</h2><span class="sec-cnt">Q13 – Q22</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">13</div>
+          <div class="q-txt">What is Change Detection in Angular and why does it exist?</div>
+        </div>
+        <div class="ans">
+          <p>Change Detection is Angular's mechanism to synchronize the component data model with the view (DOM). It runs after every asynchronous event (user interaction, HTTP response, timer) and checks if data has changed to update the DOM accordingly.</p>
+          <div class="kp">💡 Angular uses a component tree — change detection traverses from root to leaf checking each component.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">14</div>
+          <div class="q-txt">What is Zone.js and what role does it play in Change Detection?</div>
+        </div>
+        <div class="ans">
+          <p>Zone.js is a library that monkey-patches asynchronous browser APIs (setTimeout, addEventListener, XHR, Promises) to notify Angular when an async operation completes. Angular wraps the app in
+            <code>NgZone</code>, which triggers change detection automatically after each async task.
+          </p>
+          <div class="tip">✅ With Signals (Angular 17+), zone.js dependency is being phased out. Zoneless apps use signals to track reactivity precisely.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">15</div>
+          <div class="q-txt">What are the two Change Detection strategies in Angular?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Default</strong> — Every component in the tree is checked on every CD cycle. Simple but can be slow for large apps. <strong>OnPush</strong> — Component is checked only when: (1) an @Input reference changes, (2) an event originates from that component, (3) an Observable via async pipe emits, or (4) detectChanges() / markForCheck() is called manually.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">16</div>
+          <div class="q-txt">What is OnPush strategy? When should you use it?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">@Component</span>({
+  selector: 'app-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,  <span class="cm">// ← add this</span>
+  template: `{{ item.name }}`
+})
+<span class="kw">export class</span> <span class="fn">ItemComponent</span> {
+  <span class="kw">@Input()</span> item!: Item;  <span class="cm">// Must pass new reference, not mutate</span>
+}</pre>
+          <div class="tip">✅ Use with: smart + dumb component pattern, immutable data / spread operators, Observables + async pipe. Great for performance in large lists.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">17</div>
+          <div class="q-txt">What is ChangeDetectorRef and what methods does it have?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>ChangeDetectorRef</code> gives direct control over change detection for a component. Key methods:
+            <code>detectChanges()</code> — Immediately runs CD for this component and its children.
+            <code>markForCheck()</code> — Marks the component (and ancestors) to be checked in the next CD cycle.
+            <code>detach()</code> — Removes component from CD tree (must call detectChanges manually).
+            <code>reattach()</code> — Re-attaches to CD tree.
+            <code>checkNoChanges()</code> — Throws error if any changes are detected (dev mode).
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">18</div>
+          <div class="q-txt">What is the difference between detectChanges() and markForCheck()?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>detectChanges()</th>
+              <th>markForCheck()</th>
+            </tr>
+            <tr>
+              <td>Runs CD</td>
+              <td>Immediately, synchronously</td>
+              <td>On next global CD cycle</td>
+            </tr>
+            <tr>
+              <td>Scope</td>
+              <td>Component + children only</td>
+              <td>Component + all ancestors up to root</td>
+            </tr>
+            <tr>
+              <td>Use when</td>
+              <td>Async data arrives outside Angular zone</td>
+              <td>OnPush + data changed via service/Subject</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">19</div>
+          <div class="q-txt">What triggers Change Detection in Angular by default?</div>
+        </div>
+        <div class="ans">
+          <p>Zone.js intercepts and triggers CD after: <strong>DOM events</strong> (click, input, scroll), <strong>HTTP requests</strong> (XHR/fetch), <strong>Timers</strong> (setTimeout, setInterval), <strong>Promises</strong> resolved/rejected, <strong>Router navigation</strong>, and any other async operation Angular knows about via NgZone.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">20</div>
+          <div class="q-txt">What is detach() in ChangeDetectorRef and why is it powerful?</div>
+        </div>
+        <div class="ans">
+          <p>Calling
+            <code>cdr.detach()</code> completely removes a component from Angular's CD tree. The component won't be automatically checked — you control exactly when to run detection by calling
+            <code>cdr.detectChanges()</code> manually.
+          </p>
+          <div class="kp">💡 Power pattern: Polling dashboards — detach from CD, only call detectChanges() when new data arrives. Can dramatically improve performance for complex UIs.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">21</div>
+          <div class="q-txt">What is the difference between ApplicationRef.tick() and detectChanges()?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>ApplicationRef.tick()</code> — Triggers a full application-wide change detection cycle starting from root. Equivalent to what zone.js calls after each async task.
+            <code>detectChanges()</code> — Runs CD only for a specific component subtree.
+            <code>tick()</code> is broader and more expensive; use it when you need to trigger global CD from outside Angular's zone.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">22</div>
+          <div class="q-txt">Common performance mistakes with Default Change Detection?</div>
+        </div>
+        <div class="ans">
+          <p>1. Using Default strategy everywhere — runs CD on every component for every event. 2. Heavy computations in template expressions or getters (called repeatedly). 3. Not using
+            <code>trackBy</code> in *ngFor / @for — recreates DOM on every change. 4. Using impure pipes where pure pipes suffice. 5. Updating data by mutation instead of immutable patterns (preventing OnPush optimizations).
+          </p>
+        </div>
+      </div>
+      <div class="pf"><span>Section 2: Change Detection | Q13–Q22</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 3: ANGULAR SIGNALS  Q23–Q30
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 3 • Angular Signals</span></div>
+      <div class="sec-hdr purple">
+        <div class="sec-ico">📡</div>
+        <h2>Section 3: Angular Signals</h2><span class="sec-cnt">Q23 – Q30</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">23</div>
+          <div class="q-txt">What are Signals in Angular? What types do we have?</div>
+        </div>
+        <div class="ans">
+          <p>Signals are reactive primitives that hold a value and notify consumers when the value changes — enabling fine-grained, zone-free reactivity. Types: <strong>signal()</strong> — writable signal. <strong>computed()</strong> — derived read-only signal. <strong>effect()</strong> — side-effect runner when signals change.</p>
+          <pre><span class="kw">const</span> count = <span class="fn">signal</span>(0);          <span class="cm">// WritableSignal</span>
+<span class="kw">const</span> doubled = <span class="fn">computed</span>(() => count() * 2); <span class="cm">// computed</span>
+<span class="fn">effect</span>(() => console.log(count())); <span class="cm">// runs when count changes</span>
+count.<span class="fn">set</span>(5);   count.<span class="fn">update</span>(v => v + 1);</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">24</div>
+          <div class="q-txt">Are Signals a replacement for RxJS? If not, what is the use of Signals?</div>
+        </div>
+        <div class="ans">
+          <p><strong>No, Signals are not a full replacement for RxJS.</strong> They serve different purposes: <strong>Signals</strong> — synchronous, fine-grained reactivity for state management in components (replace BehaviorSubject for simple state, replace zone.js for CD). <strong>RxJS</strong> — asynchronous streams, complex operators (switchMap, debounce, combineLatest), event handling, HTTP. They complement each other. Angular even provides
+            <code>toSignal()</code> and
+            <code>toObservable()</code> for interop.
+          </p>
+          <div class="kp">💡 Use Signals for component state. Use RxJS for async data flows and complex event streams.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">25</div>
+          <div class="q-txt">What are Effects in Signals? When to use them?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>effect()</code> runs a side-effect whenever the signals it reads change. It automatically tracks dependencies.
+          </p>
+          <pre><span class="fn">effect</span>(() => {
+  <span class="cm">// Runs whenever 'user' signal changes</span>
+  localStorage.<span class="fn">setItem</span>(<span class="str">'user'</span>, JSON.<span class="fn">stringify</span>(user()));
+});</pre>
+          <div class="warn">⚠️ Don't update signals inside effects — can cause infinite loops. Use allowSignalWrites: true only if necessary.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">26</div>
+          <div class="q-txt">What are Computed Signals? Give a real-time use case.</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>computed()</code> creates a derived read-only signal that automatically recalculates when its signal dependencies change. It's memoized — only recomputes when inputs change.
+          </p>
+          <pre><span class="kw">const</span> cart = <span class="fn">signal</span>([{price:100},{price:200}]);
+<span class="kw">const</span> total = <span class="fn">computed</span>(() =>
+  cart().<span class="fn">reduce</span>((sum, item) => sum + item.price, 0)
+); <span class="cm">// Real use case: cart total auto-updates</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">27</div>
+          <div class="q-txt">How does Change Detection work with Signals (no zone.js dependency)?</div>
+        </div>
+        <div class="ans">
+          <p>With Signals, Angular knows exactly which component reads which signal. When a signal changes, Angular marks only those specific components dirty and re-renders them — without needing zone.js to trigger a global CD cycle. This is called <strong>fine-grained reactivity</strong>. In a fully zoneless app, you opt out of zone.js and Angular relies entirely on Signals for change tracking.</p>
+          <div class="tip">✅ Zoneless = faster, less overhead, better performance — the future direction of Angular.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">28</div>
+          <div class="q-txt">Explain @Input with Signals, Linked Signal, and use of untrack().</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Signal input (Angular 17.1+)</span>
+name = <span class="fn">input</span>&lt;string&gt;();  <span class="cm">// read-only signal @Input</span>
+name = <span class="fn">input.required</span>&lt;string&gt;();
+<span class="cm">// Linked Signal — writable signal linked to another</span>
+source = <span class="fn">signal</span>(10);
+linked = <span class="fn">linkedSignal</span>(() => source() * 2);
+<span class="cm">// untrack() — read a signal without creating a dependency</span>
+<span class="fn">effect</span>(() => {
+  <span class="kw">const</span> a = signalA();  <span class="cm">// tracked</span>
+  <span class="kw">const</span> b = <span class="fn">untrack</span>(() => signalB()); <span class="cm">// not tracked</span>
+});</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">29</div>
+          <div class="q-txt">Difference between signal.set() and signal.update()?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>set(value)</code> — Replaces the signal's value with a completely new value.
+            <code>update(fn)</code> — Updates the value based on the current value (like a functional updater).
+          </p>
+          <pre>count.<span class="fn">set</span>(10);          <span class="cm">// set absolute value</span>
+count.<span class="fn">update</span>(v => v + 1); <span class="cm">// increment based on current value</span>
+arr.<span class="fn">update</span>(list => [...list, newItem]); <span class="cm">// immutable add</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">30</div>
+          <div class="q-txt">How do you store API response data in Angular — Signals vs normal variables?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>Normal Variable</th>
+              <th>Signal</th>
+            </tr>
+            <tr>
+              <td>Reactivity</td>
+              <td>Needs zone.js to trigger CD</td>
+              <td>Automatically triggers targeted CD</td>
+            </tr>
+            <tr>
+              <td>Template update</td>
+              <td>Via zone.js / detectChanges</td>
+              <td>Automatic, fine-grained</td>
+            </tr>
+            <tr>
+              <td>OnPush compat</td>
+              <td>Needs markForCheck()</td>
+              <td>Works automatically</td>
+            </tr>
+            <tr>
+              <td>Recommendation</td>
+              <td>Legacy code</td>
+              <td>New Angular 17+ apps</td>
+            </tr>
+          </table>
+          <pre>users = <span class="fn">signal</span>&lt;User[]&gt;([]);
+<span class="fn">ngOnInit</span>() { this.api.<span class="fn">getUsers</span>().<span class="fn">subscribe</span>(data => this.users.<span class="fn">set</span>(data)); }</pre>
+        </div>
+      </div>
+      <div class="pf"><span>Section 3: Angular Signals | Q23–Q30</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 4: COMPONENT COMMUNICATION  Q31–Q37
+     SECTION 5: FORMS  Q38–Q44
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 4 • Component Communication | Section 5 • Forms</span></div>
+      <div class="sec-hdr teal">
+        <div class="sec-ico">📦</div>
+        <h2>Section 4: Component Communication</h2><span class="sec-cnt">Q31 – Q37</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">31</div>
+          <div class="q-txt">Various ways of component communication (with and without parent-child relationship)?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Parent → Child:</strong>
+            <code>@Input()</code> property binding. <strong>Child → Parent:</strong>
+            <code>@Output()</code> + EventEmitter. <strong>Parent accessing child:</strong>
+            <code>@ViewChild</code>. <strong>Sibling / unrelated components:</strong> Shared Service with
+            <code>BehaviorSubject</code> /
+            <code>Subject</code>, NgRx Store, or Signals. <strong>Template variables:</strong>
+            <code>#ref</code> for direct template access.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">32</div>
+          <div class="q-txt">Use of ViewChild, ContentChild, ViewChildren?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>@ViewChild</code> — Query a single element/component/directive from the component's own template. Available from
+            <code>ngAfterViewInit</code>.
+            <code>@ContentChild</code> — Query a single projected content element (ng-content). Available from
+            <code>ngAfterContentInit</code>.
+            <code>@ViewChildren</code> — Returns a
+            <code>QueryList</code> of all matching elements in the view. Updates dynamically.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">33</div>
+          <div class="q-txt">Can we access @Input inside constructor or only in ngOnInit?</div>
+        </div>
+        <div class="ans">
+          <p>With traditional
+            <code>@Input()</code>, values are <strong>NOT available in the constructor</strong> — only from
+            <code>ngOnChanges</code> and
+            <code>ngOnInit</code> onwards. With Signal inputs (
+            <code>input()</code> in Angular 17.1+), the signal itself is available in the constructor but its value is set before ngOnInit.
+          </p>
+          <div class="kp">💡 Rule: Never access @Input in constructor. Use ngOnInit or ngOnChanges.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">34</div>
+          <div class="q-txt">How to render dynamic components using ViewContainerRef.createComponent()?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">@ViewChild</span>(<span class="str">'container'</span>, { read: ViewContainerRef }) vcr!: ViewContainerRef;
+<span class="fn">loadComponent</span>() {
+  this.vcr.<span class="fn">clear</span>();
+  <span class="kw">const</span> ref = this.vcr.<span class="fn">createComponent</span>(MyDynamicComponent);
+  ref.instance.data = <span class="str">'Hello'</span>;  <span class="cm">// pass data to dynamic component</span>
+}</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">35</div>
+          <div class="q-txt">Create a reusable input using ControlValueAccessor.</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">@Component</span>({ providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CustomInputComponent, multi: true }] })
+<span class="kw">export class</span> <span class="fn">CustomInputComponent</span> <span class="kw">implements</span> ControlValueAccessor {
+  value = '';
+  onChange = (_: any) => {};
+  <span class="fn">writeValue</span>(val: any) { this.value = val; }
+  <span class="fn">registerOnChange</span>(fn: any) { this.onChange = fn; }
+  <span class="fn">registerOnTouched</span>(fn: any) {}
+}</pre>
+          <div class="tip">✅ This lets you use the component with both ngModel and FormControl.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">36</div>
+          <div class="q-txt">Custom directive using ElementRef, HostListener, Renderer2.</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">@Directive</span>({ selector: <span class="str">'[appHighlight]'</span> })
+<span class="kw">export class</span> <span class="fn">HighlightDirective</span> {
+  <span class="kw">constructor</span>(<span class="kw">private</span> el: ElementRef, <span class="kw">private</span> renderer: Renderer2) {}
+  <span class="kw">@HostListener</span>(<span class="str">'mouseenter'</span>) <span class="fn">onEnter</span>() {
+    this.renderer.<span class="fn">setStyle</span>(this.el.nativeElement, <span class="str">'background'</span>, <span class="str">'yellow'</span>);
+  }
+  <span class="kw">@HostListener</span>(<span class="str">'mouseleave'</span>) <span class="fn">onLeave</span>() {
+    this.renderer.<span class="fn">removeStyle</span>(this.el.nativeElement, <span class="str">'background'</span>);
+  }
+}</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">37</div>
+          <div class="q-txt">What is @HostListener and Renderer2? Why use Renderer2 instead of direct DOM manipulation?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>@HostListener</code> listens to events on the host element of a directive/component. <strong>Renderer2</strong> is an abstraction layer for DOM manipulation that works across platforms (browser, server-side rendering, Web Workers) unlike direct DOM access via nativeElement which breaks SSR. Use
+            <code>renderer.setStyle()</code>,
+            <code>renderer.addClass()</code> etc. instead of element.style directly.
+          </p>
+        </div>
+      </div>
+      <div class="sec-hdr rose" style="margin-top:10px">
+        <div class="sec-ico">📝</div>
+        <h2>Section 5: Forms</h2><span class="sec-cnt">Q38 – Q44</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">38</div>
+          <div class="q-txt">Difference between Template-driven and Reactive Forms.</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>Template-driven</th>
+              <th>Reactive Forms</th>
+            </tr>
+            <tr>
+              <td>Setup</td>
+              <td>In HTML template (ngModel)</td>
+              <td>In TypeScript (FormBuilder)</td>
+            </tr>
+            <tr>
+              <td>Validation</td>
+              <td>HTML attributes</td>
+              <td>Validator functions</td>
+            </tr>
+            <tr>
+              <td>Scalability</td>
+              <td>Simple forms</td>
+              <td>Complex/dynamic forms</td>
+            </tr>
+            <tr>
+              <td>Testing</td>
+              <td>Harder</td>
+              <td>Easier (pure TS)</td>
+            </tr>
+            <tr>
+              <td>Module</td>
+              <td>FormsModule</td>
+              <td>ReactiveFormsModule</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">39</div>
+          <div class="q-txt">Difference between setValue and patchValue in Reactive Forms.</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>setValue()</code> — Must provide values for ALL controls. Throws error if any field is missing.
+            <code>patchValue()</code> — Can provide values for a SUBSET of controls. Missing fields are unchanged. Use patchValue for partial updates (e.g., pre-filling only some fields from API response).
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">40</div>
+          <div class="q-txt">How to create a Dynamic Form by reading from a constant/JSON config?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">const</span> formConfig = [
+  { key: <span class="str">'name'</span>, type: <span class="str">'text'</span>, label: <span class="str">'Name'</span>, required: true },
+  { key: <span class="str">'email'</span>, type: <span class="str">'email'</span>, label: <span class="str">'Email'</span>, required: true }
+];
+<span class="cm">// Build form dynamically:</span>
+<span class="kw">const</span> group: any = {};
+formConfig.<span class="fn">forEach</span>(f => {
+  group[f.key] = [<span class="str">''</span>, f.required ? Validators.required : []];
+});
+this.form = this.fb.<span class="fn">group</span>(group);</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">41</div>
+          <div class="q-txt">What is FormArray? Explain inline editing with FormArray.</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>FormArray</code> manages a dynamic array of form controls. Used for repeatable form sections like adding multiple items.
+          </p>
+          <pre>this.form = this.fb.<span class="fn">group</span>({ items: this.fb.<span class="fn">array</span>([]) });
+<span class="fn">addItem</span>() { (<span class="kw">this</span>.form.<span class="fn">get</span>(<span class="str">'items'</span>) <span class="kw">as</span> FormArray).<span class="fn">push</span>(this.fb.<span class="fn">group</span>({ name: <span class="str">''</span>, qty: 1 })); }
+<span class="cm">// Template: *ngFor="let ctrl of items.controls; let i=index"</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">42</div>
+          <div class="q-txt">How to enable the next field in a reactive form based on dropdown selection?</div>
+        </div>
+        <div class="ans">
+          <pre>this.form.<span class="fn">get</span>(<span class="str">'country'</span>)?.valueChanges.<span class="fn">subscribe</span>(value => {
+  <span class="kw">const</span> stateCtrl = this.form.<span class="fn">get</span>(<span class="str">'state'</span>);
+  <span class="kw">if</span> (value) { stateCtrl?.<span class="fn">enable</span>(); }
+  <span class="kw">else</span> { stateCtrl?.<span class="fn">disable</span>(); stateCtrl?.<span class="fn">reset</span>(); }
+});</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">43</div>
+          <div class="q-txt">What is a multi-step wizard form? How to implement canDeactivate for unsaved changes?</div>
+        </div>
+        <div class="ans">
+          <p>Multi-step forms split a large form into steps using a step index. Each step has its own FormGroup. Navigate between steps after validating the current step.
+            <code>canDeactivate</code> guard prevents navigation away if the form is dirty (has unsaved changes).
+          </p>
+          <pre><span class="kw">canDeactivate</span>(component: MyFormComponent) {
+  <span class="kw">return</span> component.form.dirty
+    ? <span class="fn">confirm</span>(<span class="str">'You have unsaved changes. Leave?'</span>)
+    : true;
+}</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">44</div>
+          <div class="q-txt">What is the difference between @NgModule and @Component decorators?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>@NgModule</code> — Configures a module: declares components/pipes/directives, imports other modules, exports things for external use, and provides services.
+            <code>@Component</code> — Configures a UI component: its selector, template, styles, standalone flag, and imports (in standalone mode). With Angular 17+ standalone architecture, @Component can import dependencies directly, reducing reliance on @NgModule.
+          </p>
+        </div>
+      </div>
+      <div class="pf"><span>Section 4: Component Communication | Section 5: Forms | Q31–Q44</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 6: ROUTING & GUARDS  Q45–Q52
+     SECTION 7: DEPENDENCY INJECTION  Q53–Q58
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 6 • Routing | Section 7 • DI</span></div>
+      <div class="sec-hdr amber">
+        <div class="sec-ico">🗺️</div>
+        <h2>Section 6: Routing & Guards</h2><span class="sec-cnt">Q45 – Q52</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">45</div>
+          <div class="q-txt">What is routing? What is the purpose of the wildcard route?</div>
+        </div>
+        <div class="ans">
+          <p>Routing in Angular maps URL paths to components, enabling SPA navigation without page reloads. The <strong>wildcard route</strong> (
+            <code>path: '**'</code>) matches any URL not defined in the routes array. Typically used as a 404 page. Must be placed last — router checks routes in order.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">46</div>
+          <div class="q-txt">What are Route Guards? What types exist in Angular?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>CanActivate</code> — Can user access this route?
+            <code>CanActivateChild</code> — Can user access child routes?
+            <code>CanDeactivate</code> — Can user leave this route? (e.g., unsaved changes)
+            <code>CanLoad</code> (deprecated) /
+            <code>CanMatch</code> — Can this lazy-loaded module be loaded?
+            <code>Resolve</code> — Fetch data before route activates. Modern Angular uses functional guards:
+            <code>canActivate: [() => inject(AuthService).isLoggedIn()]</code>
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">47</div>
+          <div class="q-txt">Can we apply multiple guards on a single route? What happens if one fails?</div>
+        </div>
+        <div class="ans">
+          <p>Yes:
+            <code>canActivate: [AuthGuard, RoleGuard, SubscriptionGuard]</code>. Guards run <strong>sequentially</strong> (not in parallel). If the first guard returns false or a redirect, subsequent guards are NOT executed. Navigation is cancelled at the first failing guard.
+          </p>
+          <div class="kp">💡 Order matters. Put most-likely-to-fail guards first for performance.</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">48</div>
+          <div class="q-txt">When should we use CanActivate vs CanLoad (CanMatch)?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>CanActivate</th>
+              <th>CanLoad / CanMatch</th>
+            </tr>
+            <tr>
+              <td>Prevents</td>
+              <td>Route activation</td>
+              <td>Lazy module loading entirely</td>
+            </tr>
+            <tr>
+              <td>Bundle download</td>
+              <td>Module still downloads</td>
+              <td>Module never downloads if false</td>
+            </tr>
+            <tr>
+              <td>Use for</td>
+              <td>Auth checks on eager routes</td>
+              <td>Truly hiding lazy modules from unauthorized users</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">49</div>
+          <div class="q-txt">What does router-outlet do? Can we have more than one?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>&lt;router-outlet&gt;</code> is a placeholder where Angular renders the component matched to the current route. Yes, you can have multiple router-outlets using <strong>named outlets</strong>:
+            <code>&lt;router-outlet name="sidebar"&gt;</code>. Navigate to named outlets with:
+            <code>{ outlets: { primary: ['home'], sidebar: ['menu'] } }</code>. Used for sidebars, popups, or multi-panel layouts.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">50</div>
+          <div class="q-txt">How to implement a dynamic menu based on roles, with guards and icons/labels?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// menu.config.ts</span>
+<span class="kw">const</span> MENU = [
+  { label: <span class="str">'Dashboard'</span>, route: <span class="str">'/dashboard'</span>, icon: <span class="str">'home'</span>, roles: [<span class="str">'admin'</span>,<span class="str">'user'</span>] },
+  { label: <span class="str">'Settings'</span>,  route: <span class="str">'/settings'</span>,  icon: <span class="str">'gear'</span>, roles: [<span class="str">'admin'</span>] }
+];
+<span class="cm">// Filter based on user role:</span>
+visibleMenu = MENU.<span class="fn">filter</span>(m => m.roles.<span class="fn">includes</span>(this.authService.userRole));</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">51</div>
+          <div class="q-txt">How to implement permission-based / role-based directives?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">@Directive</span>({ selector: <span class="str">'[hasRole]'</span> })
+<span class="kw">export class</span> <span class="fn">HasRoleDirective</span> {
+  <span class="kw">@Input</span>() <span class="kw">set</span> <span class="fn">hasRole</span>(role: string) {
+    <span class="kw">if</span> (!this.auth.<span class="fn">hasRole</span>(role)) {
+      this.vcr.<span class="fn">clear</span>();  <span class="cm">// remove element from DOM</span>
+    }
+  }
+}
+<span class="cm">&lt;button *hasRole="'admin'"&gt;Delete&lt;/button&gt;</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">52</div>
+          <div class="q-txt">How to implement breadcrumbs using routing as a reusable component?</div>
+        </div>
+        <div class="ans">
+          <p>Add
+            <code>data: { breadcrumb: 'Home' }</code> to route configs. In a BreadcrumbComponent, subscribe to
+            <code>router.events</code>, filter for
+            <code>NavigationEnd</code>, then traverse
+            <code>activatedRoute</code> snapshot building breadcrumb trail from route data.
+          </p>
+        </div>
+      </div>
+      <div class="sec-hdr" style="margin-top:10px">
+        <div class="sec-ico">💉</div>
+        <h2>Section 7: Dependency Injection & Services</h2><span class="sec-cnt">Q53 – Q58</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">53</div>
+          <div class="q-txt">Explain Dependency Injection in Angular. How does it work internally?</div>
+        </div>
+        <div class="ans">
+          <p>DI is a design pattern where a class receives its dependencies from an external source instead of creating them. Angular has a hierarchical injector tree: Root Injector → Module Injectors → Component Injectors. When a component requests a service, Angular walks up the injector tree until it finds a provider. If found at a higher level, all components sharing that injector share the same instance (singleton at that level).</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">54</div>
+          <div class="q-txt">Singleton services — what happens when you provide a service in a component vs lazy-loaded module?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Root (providedIn: 'root')</strong> — Single instance app-wide. <strong>Component-level (providers: [MyService])</strong> — New instance for each component instance (and its children). Destroyed when component is destroyed. <strong>Lazy-loaded module</strong> — New child injector created; module gets its own instance if provided there, separate from root instance. <strong>This is a common bug source</strong> — services intended as singletons accidentally get multiple instances.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">55</div>
+          <div class="q-txt">What is providedIn in Angular?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>providedIn</code> in
+            <code>@Injectable</code> specifies where to register the service.
+            <code>'root'</code> — registers in the root injector (singleton, tree-shakable).
+            <code>'platform'</code> — shared across multiple Angular apps on the same page.
+            <code>'any'</code> — unique instance per lazy module.
+            <code>MyModule</code> — registered only in that module's injector. Most services should use
+            <code>providedIn: 'root'</code>.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">56</div>
+          <div class="q-txt">Why use NgRx/Store instead of shared services?</div>
+        </div>
+        <div class="ans">
+          <p>Shared services work well for simple state, but NgRx provides: <strong>Single source of truth</strong> — predictable state. <strong>Time-travel debugging</strong> — Redux DevTools. <strong>Immutability</strong> — reducers return new state. <strong>Scalability</strong> — clear separation of actions, reducers, effects, selectors. <strong>Side-effect management</strong> — Effects handle async operations cleanly. Use NgRx when state is complex, shared across many components, or needs audit logging.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">57</div>
+          <div class="q-txt">What is garbage collection in JavaScript?</div>
+        </div>
+        <div class="ans">
+          <p>JavaScript uses automatic garbage collection (primarily <strong>mark-and-sweep</strong> algorithm). The GC marks all reachable objects from roots (global scope, stack) and sweeps (frees) unreachable objects. In Angular, memory leaks occur when subscriptions keep references to components after they're destroyed — preventing GC from collecting them. Always unsubscribe in
+            <code>ngOnDestroy</code>.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">58</div>
+          <div class="q-txt">What is the ideal response time for an API? What is a CDN?</div>
+        </div>
+        <div class="ans">
+          <p><strong>API response time:</strong> Ideal is under 200ms. Good is under 1s. Over 3s = poor UX. Measure with Lighthouse / Chrome DevTools Network tab. <strong>CDN (Content Delivery Network):</strong> A distributed network of servers that cache static assets (JS, CSS, images) geographically close to users, reducing latency. Angular apps are deployed to CDNs for faster global delivery.</p>
+        </div>
+      </div>
+      <div class="pf"><span>Section 6: Routing & Guards | Section 7: DI & Services | Q45–Q58</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 8: HTTP & INTERCEPTORS  Q59–Q66
+     SECTION 9: RXJS & OBSERVABLES  Q67–Q78
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 8 • HTTP & Interceptors | Section 9 • RxJS</span></div>
+      <div class="sec-hdr slate">
+        <div class="sec-ico">🌐</div>
+        <h2>Section 8: HTTP & Interceptors</h2><span class="sec-cnt">Q59 – Q66</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">59</div>
+          <div class="q-txt">What are HTTP Interceptors? Use cases?</div>
+        </div>
+        <div class="ans">
+          <p>Interceptors intercept every outgoing HTTP request and incoming response, allowing cross-cutting concerns to be handled in one place. Use cases: <strong>Token attachment</strong> — Add Authorization header to every request. <strong>Global error handling</strong> — Handle 401/403/500 errors centrally. <strong>Loading spinner</strong> — Show/hide loader on request/response. <strong>Caching</strong> — Return cached responses. <strong>Request logging / profiling</strong> — Log API timings. <strong>Mocking</strong> — Return fake data in development/testing.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">60</div>
+          <div class="q-txt">Write interceptor code for attaching token and handling errors.</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">export const</span> authInterceptor: HttpInterceptorFn = (req, next) => {
+  <span class="kw">const</span> token = <span class="fn">inject</span>(AuthService).getToken();
+  <span class="kw">const</span> authReq = token
+    ? req.<span class="fn">clone</span>({ setHeaders: { Authorization: <span class="str">`Bearer ${token}`</span> } })
+    : req;
+  <span class="kw">return</span> <span class="fn">next</span>(authReq).<span class="fn">pipe</span>(
+    <span class="fn">catchError</span>(err => {
+      <span class="kw">if</span> (err.status === 401) <span class="fn">inject</span>(Router).<span class="fn">navigate</span>([<span class="str">'/login'</span>]);
+      <span class="kw">return</span> <span class="fn">throwError</span>(() => err);
+    })
+  );
+};</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">61</div>
+          <div class="q-txt">Can we have multiple interceptors? What is their order?</div>
+        </div>
+        <div class="ans">
+          <p>Yes. Register multiple interceptors in
+            <code>providers</code>. They execute in the <strong>order registered for requests</strong>, and in <strong>reverse order for responses</strong> (like middleware stack). Angular 17+ functional interceptors:
+            <code>withInterceptors([loggingInterceptor, authInterceptor])</code>. The request goes: logging → auth → server. Response comes back: auth → logging.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">62</div>
+          <div class="q-txt">How do you call multiple APIs simultaneously in Angular?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// forkJoin — wait for ALL to complete</span>
+<span class="fn">forkJoin</span>([this.api.<span class="fn">getUsers</span>(), this.api.<span class="fn">getOrders</span>()])
+  .<span class="fn">subscribe</span>(([users, orders]) => { ... });
+<span class="cm">// combineLatest — emit when ANY changes</span>
+<span class="fn">combineLatest</span>([user$, settings$]).<span class="fn">subscribe</span>(([user, settings]) => {...});
+<span class="cm">// Promise.race equivalent — first to respond wins</span>
+<span class="fn">race</span>([api1$, api2$]).<span class="fn">subscribe</span>(firstResult => {...});</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">63</div>
+          <div class="q-txt">How to call an API only after the previous one completes?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// switchMap / concatMap for sequential calls</span>
+this.api.<span class="fn">getUser</span>(id).<span class="fn">pipe</span>(
+  <span class="fn">switchMap</span>(user => this.api.<span class="fn">getOrdersForUser</span>(user.id))
+).<span class="fn">subscribe</span>(orders => {...});
+<span class="cm">// concatMap if order matters and no cancellation needed</span>
+requests$.<span class="fn">pipe</span>(<span class="fn">concatMap</span>(req => this.api.<span class="fn">process</span>(req))).<span class="fn">subscribe</span>();</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">64</div>
+          <div class="q-txt">Difference between forkJoin vs mergeMap?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>forkJoin</code> — Combines multiple observables, waits for ALL to complete, emits one combined result. Best for parallel independent API calls where you need all results.
+            <code>mergeMap</code> (flatMap) — Maps each emission to an inner observable and merges their outputs concurrently without waiting. Best for parallel operations where each input triggers a separate async operation (e.g., uploading multiple files simultaneously).
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">65</div>
+          <div class="q-txt">What is the difference between package.json and package-lock.json?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>package.json</code> — Declares project dependencies with version ranges (e.g.,
+            <code>^17.0.0</code>). Human-editable.
+            <code>package-lock.json</code> — Records the exact version tree of every installed package. Auto-generated by npm. Ensures reproducible installs across machines — same exact versions are installed every time. Always commit package-lock.json to version control.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">66</div>
+          <div class="q-txt">How to prevent duplicate form submissions when API is slow?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Use exhaustMap — ignores new clicks while request is in-flight</span>
+this.submitBtn.clicks$.pipe(
+  <span class="fn">exhaustMap</span>(() => this.api.<span class="fn">submit</span>(this.form.value))
+).<span class="fn">subscribe</span>();
+<span class="cm">// OR: disable button on submit, re-enable on response</span>
+isSubmitting = <span class="kw">false</span>;
+<span class="fn">onSubmit</span>() { this.isSubmitting = <span class="kw">true</span>; this.api.<span class="fn">submit</span>()
+  .<span class="fn">pipe</span>(<span class="fn">finalize</span>(() => this.isSubmitting = <span class="kw">false</span>)).<span class="fn">subscribe</span>(); }</pre>
+        </div>
+      </div>
+      <div class="sec-hdr green" style="margin-top:10px">
+        <div class="sec-ico">🔃</div>
+        <h2>Section 9: RxJS & Observables</h2><span class="sec-cnt">Q67 – Q78</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">67</div>
+          <div class="q-txt">Observable vs Promise — key differences?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>Observable</th>
+              <th>Promise</th>
+            </tr>
+            <tr>
+              <td>Values</td>
+              <td>Multiple values over time (stream)</td>
+              <td>Single value</td>
+            </tr>
+            <tr>
+              <td>Lazy</td>
+              <td>Yes — executes only when subscribed</td>
+              <td>No — executes immediately</td>
+            </tr>
+            <tr>
+              <td>Cancellable</td>
+              <td>Yes — unsubscribe()</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Operators</td>
+              <td>Rich (map, filter, switchMap...)</td>
+              <td>Limited (.then, .catch)</td>
+            </tr>
+            <tr>
+              <td>Use for</td>
+              <td>HTTP streams, events, WebSocket</td>
+              <td>Single async operations</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">68</div>
+          <div class="q-txt">Cold vs Hot Observables? Unicast vs Multicast?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Cold Observable</strong> — Creates a new producer for each subscriber (unicast). E.g., HTTP request — each subscribe triggers a new HTTP call. <strong>Hot Observable</strong> — Shares a single producer across all subscribers (multicast). E.g., mouse events, WebSocket — subscribers receive values happening at the time of subscription. <strong>Subjects</strong> are hot and multicast. Use
+            <code>share()</code> or
+            <code>publish()</code> to make cold observables hot.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">69</div>
+          <div class="q-txt">Subject vs BehaviorSubject vs ReplaySubject?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>Subject</th>
+              <th>BehaviorSubject</th>
+              <th>ReplaySubject</th>
+            </tr>
+            <tr>
+              <td>Initial value</td>
+              <td>None</td>
+              <td>Required</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td>New subscriber gets</td>
+              <td>Only future values</td>
+              <td>Current + future values</td>
+              <td>Last N values + future</td>
+            </tr>
+            <tr>
+              <td>Use for</td>
+              <td>Events</td>
+              <td>State (current value matters)</td>
+              <td>History needed</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">70</div>
+          <div class="q-txt">Explain switchMap, mergeMap, concatMap, exhaustMap with real scenarios.</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th>Operator</th>
+              <th>Behavior</th>
+              <th>Real-world use case</th>
+            </tr>
+            <tr>
+              <td>switchMap</td>
+              <td>Cancels previous inner observable</td>
+              <td>Search autocomplete (cancel old search on new input)</td>
+            </tr>
+            <tr>
+              <td>mergeMap</td>
+              <td>Runs all concurrently</td>
+              <td>Parallel file uploads</td>
+            </tr>
+            <tr>
+              <td>concatMap</td>
+              <td>Queues — waits for previous to complete</td>
+              <td>Sequential API calls, ordered uploads</td>
+            </tr>
+            <tr>
+              <td>exhaustMap</td>
+              <td>Ignores new while current runs</td>
+              <td>Login/submit button — prevent duplicate submissions</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">71</div>
+          <div class="q-txt">How to avoid memory leaks in Angular? (unsubscribe, takeUntil, async pipe)</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Option 1: takeUntilDestroyed (Angular 16+) — RECOMMENDED</span>
+data$ = this.api.<span class="fn">getData</span>().<span class="fn">pipe</span>(<span class="fn">takeUntilDestroyed</span>());
+<span class="cm">// Option 2: async pipe — auto unsubscribes</span>
+<span class="cm">// Template: &lt;div *ngIf="data$ | async as data"&gt;</span>
+<span class="cm">// Option 3: manual takeUntil</span>
+destroy$ = <span class="kw">new</span> Subject&lt;void&gt;();
+this.data$.<span class="fn">pipe</span>(<span class="fn">takeUntil</span>(this.destroy$)).<span class="fn">subscribe</span>();
+<span class="fn">ngOnDestroy</span>() { this.destroy$.<span class="fn">next</span>(); this.destroy$.<span class="fn">complete</span>(); }</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">72</div>
+          <div class="q-txt">What are Promises? Explain Promise.all, Promise.race, Promise.allSettled.</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>Promise.all([p1,p2,p3])</code> — Resolves when ALL resolve. Rejects immediately if ANY reject.
+            <code>Promise.race([p1,p2,p3])</code> — Settles with the FIRST to settle (resolve or reject).
+            <code>Promise.allSettled([p1,p2,p3])</code> — Waits for ALL to settle regardless of resolve/reject; returns array of
+            <code>{status, value/reason}</code>.
+            <code>Promise.any([p1,p2,p3])</code> — Resolves with first to resolve; rejects only if ALL reject.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">73</div>
+          <div class="q-txt">What is async/await? How does it differ from Promises?</div>
+        </div>
+        <div class="ans">
+          <p>async/await is syntactic sugar over Promises, making async code read like synchronous code.
+            <code>async</code> marks a function as returning a Promise.
+            <code>await</code> pauses execution inside that function until the Promise resolves. Under the hood it's still Promises — the difference is readability and error handling (
+            <code>try/catch</code> instead of
+            <code>.catch()</code>).
+          </p>
+          <pre><span class="kw">async</span> <span class="fn">fetchData</span>() {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> user = <span class="kw">await</span> this.api.<span class="fn">getUser</span>();
+    <span class="kw">const</span> orders = <span class="kw">await</span> this.api.<span class="fn">getOrders</span>(user.id);
+  } <span class="kw">catch</span>(err) { console.error(err); }
+}</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">74</div>
+          <div class="q-txt">RxJS tap operator — when to use it?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>tap()</code> performs side effects without modifying the stream. Use it for: logging, debugging, triggering UI state changes (show loader), or tracking analytics — without disrupting the data flow through the pipe.
+          </p>
+          <pre>this.api.<span class="fn">getUsers</span>().<span class="fn">pipe</span>(
+  <span class="fn">tap</span>(() => this.loading = <span class="kw">true</span>),
+  <span class="fn">tap</span>(data => console.<span class="fn">log</span>(<span class="str">'Debug:'</span>, data))
+).<span class="fn">subscribe</span>();</pre>
+        </div>
+      </div>
+      <div class="pf"><span>Section 8: HTTP & Interceptors | Section 9: RxJS | Q59–Q74</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 10: STATE MANAGEMENT  Q75–Q80
+     SECTION 11: PERFORMANCE  Q81–Q88
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 10 • NgRx | Section 11 • Performance</span></div>
+      <div class="sec-hdr purple">
+        <div class="sec-ico">🏪</div>
+        <h2>Section 10: State Management & NgRx</h2><span class="sec-cnt">Q75 – Q80</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">75</div>
+          <div class="q-txt">What are NgRx actions, reducers, effects, and selectors?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Actions</strong> — Plain objects describing events:
+            <code>createAction('[Users] Load')</code>. <strong>Reducers</strong> — Pure functions that take state + action and return new state. <strong>Effects</strong> — Handle side effects (API calls); listen for actions, perform async work, dispatch new actions. <strong>Selectors</strong> — Memoized functions to query/derive state:
+            <code>createSelector()</code>. <strong>Store</strong> — Single immutable state tree (Observable). <strong>Flow:</strong> Component dispatches action → Effect handles async → dispatches success/fail action → Reducer updates state → Selector reads state → Component receives update.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">76</div>
+          <div class="q-txt">Subject vs BehaviorSubject — when to use which? (Scenario-based)</div>
+        </div>
+        <div class="ans">
+          <p><strong>Use Subject</strong> when: You only care about future values after subscription (button clicks, event bus). <strong>Use BehaviorSubject</strong> when: New subscribers need the current/last value immediately (user auth state, theme, cart items — any state that new components need on initialization).</p>
+          <pre><span class="cm">// Auth service example</span>
+isLoggedIn$ = <span class="kw">new</span> BehaviorSubject&lt;<span class="kw">boolean</span>&gt;(<span class="kw">false</span>);
+<span class="cm">// Any component that subscribes later still gets current login state</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">77</div>
+          <div class="q-txt">Real use cases for forkJoin?</div>
+        </div>
+        <div class="ans">
+          <p>forkJoin is perfect when you need to load multiple independent data sources before rendering a page:</p>
+          <pre><span class="fn">forkJoin</span>({
+  user: this.api.<span class="fn">getUser</span>(id),
+  roles: this.api.<span class="fn">getRoles</span>(),
+  settings: this.api.<span class="fn">getSettings</span>()
+}).<span class="fn">subscribe</span>(({ user, roles, settings }) => {
+  this.vm = { user, roles, settings }; <span class="cm">// render all at once</span>
+});</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">78</div>
+          <div class="q-txt">How do you handle persist filter state when navigating back to a page?</div>
+        </div>
+        <div class="ans">
+          <p>Options: (1) <strong>Query params</strong> — Store filters in URL
+            <code>?from=2024&category=sales</code> — shareable, browser-back works. (2) <strong>Service / Store</strong> — Keep filter state in a singleton service or NgRx store. (3) <strong>SessionStorage</strong> — Persist within tab session. (4) <strong>Router state</strong> — Pass state via router extras
+            <code>{ state: { filters } }</code>. URL query params is the most robust and user-friendly approach.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">79</div>
+          <div class="q-txt">How do you keep a user logged in even if the browser tab is closed?</div>
+        </div>
+        <div class="ans">
+          <p>Store the auth token in <strong>localStorage</strong> (persists across sessions, survives tab close) instead of sessionStorage (clears on tab close). On app startup, check localStorage for an existing valid token and auto-login the user. Implement refresh token rotation — store refresh token in an HttpOnly cookie (more secure) and access token in memory or localStorage.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">80</div>
+          <div class="q-txt">RxJS Schedulers — what are they?</div>
+        </div>
+        <div class="ans">
+          <p>Schedulers control when and in what context RxJS work executes. Key types:
+            <code>asyncScheduler</code> — like setTimeout, runs asynchronously.
+            <code>animationFrameScheduler</code> — runs before browser repaint (smooth animations).
+            <code>queueScheduler</code> — runs synchronously in a queue.
+            <code>asapScheduler</code> — runs asap after current sync code (microtask). Use with
+            <code>observeOn(asyncScheduler)</code> or
+            <code>subscribeOn()</code>. Most commonly asked in senior interviews for performance-critical code.
+          </p>
+        </div>
+      </div>
+      <div class="sec-hdr teal" style="margin-top:10px">
+        <div class="sec-ico">⚡</div>
+        <h2>Section 11: Performance Optimization</h2><span class="sec-cnt">Q81 – Q88</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">81</div>
+          <div class="q-txt">Angular performance optimization techniques?</div>
+        </div>
+        <div class="ans">
+          <ul class="alist">
+            <li>Use <strong>OnPush</strong> Change Detection + immutable data patterns</li>
+            <li><strong>Lazy loading</strong> modules and components</li>
+            <li><strong>TrackBy</strong> in *ngFor / @for to minimize DOM re-renders</li>
+            <li><strong>Deferrable views</strong> (@defer) for below-the-fold content</li>
+            <li><strong>Pure pipes</strong> instead of methods in templates</li>
+            <li><strong>Virtual scrolling</strong> (CDK) for large lists</li>
+            <li><strong>Server-Side Rendering</strong> (Angular Universal) for faster FCP</li>
+            <li><strong>Image optimization</strong> — NgOptimizedImage directive</li>
+            <li><strong>Preloading strategies</strong> — PreloadAllModules or custom</li>
+            <li><strong>Signals</strong> for zoneless reactivity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">82</div>
+          <div class="q-txt">How do you identify performance bottlenecks? What tools to use?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Lighthouse</strong> (Chrome DevTools) — Audit LCP (Largest Contentful Paint), FCP (First Contentful Paint), TTI (Time to Interactive), CLS. <strong>Chrome DevTools Performance tab</strong> — Record and analyze JS execution. <strong>Angular DevTools</strong> — Visualize component tree, CD cycles, profiling. <strong>webpack-bundle-analyzer</strong> — Visualize bundle sizes. <strong>Source Maps + Network tab</strong> — Identify large bundles. Target: LCP &lt; 2.5s, FCP &lt; 1.8s.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">83</div>
+          <div class="q-txt">What is TrackBy in ngFor and @for? Why is it important?</div>
+        </div>
+        <div class="ans">
+          <p>Without trackBy, Angular re-renders the entire DOM list on any data change (even if only one item changed). With trackBy, Angular identifies items by a unique key and only re-renders changed items.</p>
+          <pre><span class="cm">&lt;!-- Old: *ngFor --&gt;</span>
+*ngFor="<span class="kw">let</span> item of items; trackBy: trackById"
+<span class="fn">trackById</span>(index: number, item: Item) { <span class="kw">return</span> item.id; }
+<span class="cm">&lt;!-- New: @for (Angular 17+) — trackBy is required! --&gt;</span>
+@<span class="fn">for</span> (item of items; track item.id) { &lt;div&gt;{{ item.name }}&lt;/div&gt; }</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">84</div>
+          <div class="q-txt">Virtual scrolling for large lists — how to implement?</div>
+        </div>
+        <div class="ans">
+          <p>Angular CDK's
+            <code>ScrollingModule</code> renders only visible items, dramatically improving performance for lists with thousands of rows.
+          </p>
+          <pre>&lt;cdk-virtual-scroll-viewport itemSize="50" style="height:400px"&gt;
+  &lt;div *cdkVirtualFor="let item of items"&gt;{{ item.name }}&lt;/div&gt;
+&lt;/cdk-virtual-scroll-viewport&gt;</pre>
+          <div class="tip">✅ For external libraries: CDK Virtual Scroll, AG Grid (built-in), or PrimeNG VirtualScroller</div>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">85</div>
+          <div class="q-txt">How to handle large data using API-based pagination?</div>
+        </div>
+        <div class="ans">
+          <pre>getPage(page: number, size: number) {
+  <span class="kw">return</span> this.http.<span class="fn">get</span>&lt;PagedResult&gt;(<span class="str">`/api/data?page=${page}&size=${size}`</span>);
+}
+<span class="cm">// Infinite scroll: use IntersectionObserver to detect bottom</span>
+<span class="cm">// Server-side sort/filter: send params to API instead of filtering locally</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">86</div>
+          <div class="q-txt">What are the bottleneck investigation steps for a slow Angular application?</div>
+        </div>
+        <div class="ans">
+          <p>1. <strong>Run Lighthouse</strong> — identify LCP, FCP, JS parse time. 2. <strong>Angular DevTools Profiler</strong> — find components with excessive CD cycles. 3. <strong>Bundle analyzer</strong> — check for large/duplicate packages. 4. <strong>Network tab</strong> — waterfall analysis, slow APIs. 5. <strong>Check *ngFor without trackBy</strong> — list re-renders. 6. <strong>Check for OnPush opportunities</strong>. 7. <strong>Check template methods</strong> — replace with pure pipes. 8. <strong>Lazy load heavy features</strong>.</p>
+        </div>
+      </div>
+      <div class="pf"><span>Section 10: NgRx | Section 11: Performance | Q75–Q86</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 12: ARCHITECTURE  Q87–Q96
+     SECTION 13: AUTHENTICATION  Q97–Q102
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 12 • Architecture | Section 13 • Auth</span></div>
+      <div class="sec-hdr rose">
+        <div class="sec-ico">🏛️</div>
+        <h2>Section 12: Angular Architecture & Advanced</h2><span class="sec-cnt">Q87 – Q96</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">87</div>
+          <div class="q-txt">What is Micro Frontend architecture and Module Federation?</div>
+        </div>
+        <div class="ans">
+          <p>Micro Frontend splits a large frontend app into independently deployable pieces (by team/domain). Each team builds and deploys their part independently. <strong>Module Federation</strong> (webpack 5) is the primary technology enabling this in Angular — it allows one Angular app (shell) to dynamically load components/modules from other apps (remotes) at runtime. Use
+            <code>@angular-architects/module-federation</code> for Angular-specific setup. Solves large-team coordination and independent deployment problems.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">88</div>
+          <div class="q-txt">Angular Universal vs SSR — what's the difference?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Angular Universal</strong> — The original server-side rendering solution for Angular (runs on Node.js/Express). Renders HTML on server and sends to browser. <strong>SSR in Angular 17+</strong> — Angular has dramatically improved built-in SSR with
+            <code>ng add @angular/ssr</code>, non-destructive hydration, and partial hydration. Hydration merges server-rendered HTML with client Angular without re-rendering. <strong>Benefits:</strong> Faster FCP/LCP, better SEO, improved performance on low-end devices.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">89</div>
+          <div class="q-txt">Angular migration from Angular 12/16 to newer versions — what steps to follow?</div>
+        </div>
+        <div class="ans">
+          <p>1. Use <strong>ng update</strong>:
+            <code>ng update @angular/core@17 @angular/cli@17</code>. 2. Fix breaking changes from migration guide (angular.io/guide/update). 3. Update RxJS, TypeScript, and third-party packages. 4. Run
+            <code>ng update --migrate-only</code> to apply code migrations. 5. Test thoroughly in a branch. 6. Migrate incrementally (one major version at a time). 7. Optional: Convert to standalone architecture with
+            <code>ng generate @angular/core:standalone</code>.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">90</div>
+          <div class="q-txt">In standalone architecture, is zone.js still required?</div>
+        </div>
+        <div class="ans">
+          <p>Not required but included by default. With Angular 18+, you can opt into a <strong>zoneless</strong> application by providing:
+            <code>bootstrapApplication(AppComponent, { providers: [provideExperimentalZonelessChangeDetection()] })</code>. This requires using Signals for all reactivity — no zone.js to trigger CD. The Angular team is working toward making this the default in future versions.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">91</div>
+          <div class="q-txt">What is CI/CD pipeline? How to manage different environment builds (dev/QA/prod)?</div>
+        </div>
+        <div class="ans">
+          <p><strong>CI/CD</strong> — Continuous Integration (automated build + test) / Continuous Deployment (automated deploy). Angular uses environment files:
+            <code>environment.ts</code> (dev),
+            <code>environment.qa.ts</code>,
+            <code>environment.prod.ts</code>. Configure in
+            <code>angular.json</code> fileReplacements. Build with:
+            <code>ng build --configuration=qa</code>. CI/CD tools: GitHub Actions, Jenkins, Azure DevOps. Pipeline: Code push → Build → Test → Deploy to env.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">92</div>
+          <div class="q-txt">What is Internationalization (i18n) in Angular?</div>
+        </div>
+        <div class="ans">
+          <p>Angular has built-in i18n support. Mark text with
+            <code>i18n</code> attribute:
+            <code>&lt;h1 i18n&gt;Hello&lt;/h1&gt;</code>. Extract with
+            <code>ng extract-i18n</code> (creates XLIFF/JSON files). Provide translations per locale. Build with
+            <code>ng build --localize</code> to create locale-specific bundles. Alternative:
+            <code>ngx-translate</code> library for runtime translation switching.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">93</div>
+          <div class="q-txt">What is the difference between AngularJS and Angular (2+)?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>AngularJS (1.x)</th>
+              <th>Angular (2+)</th>
+            </tr>
+            <tr>
+              <td>Language</td>
+              <td>JavaScript</td>
+              <td>TypeScript</td>
+            </tr>
+            <tr>
+              <td>Architecture</td>
+              <td>MVC / $scope based</td>
+              <td>Component-based</td>
+            </tr>
+            <tr>
+              <td>Data binding</td>
+              <td>Two-way by default</td>
+              <td>One-way (explicit two-way)</td>
+            </tr>
+            <tr>
+              <td>DI</td>
+              <td>Strings-based</td>
+              <td>Type-based hierarchy</td>
+            </tr>
+            <tr>
+              <td>Mobile</td>
+              <td>Not mobile-friendly</td>
+              <td>Mobile-first, PWA support</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">94</div>
+          <div class="q-txt">Project uses PrimeNG but needs migration to Angular Material — how will you plan and manage branching without affecting sprints?</div>
+        </div>
+        <div class="ans">
+          <p>1. Create a <strong>feature branch</strong> (e.g.,
+            <code>feat/material-migration</code>). 2. Implement a <strong>component-by-component migration</strong> strategy — create wrapper components that use Angular Material internally. 3. Use <strong>feature flags</strong> to toggle between old/new components. 4. Migrate low-risk components first (buttons, inputs). 5. Keep main branch clean — merge only completed, tested components. 6. Never break the sprint — migrate alongside feature work.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">95</div>
+          <div class="q-txt">Polling / auto-refresh / auto-save in Angular?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Polling with RxJS interval</span>
+<span class="fn">interval</span>(5000).<span class="fn">pipe</span>(
+  <span class="fn">startWith</span>(0),
+  <span class="fn">switchMap</span>(() => this.api.<span class="fn">getData</span>()),
+  <span class="fn">takeUntilDestroyed</span>()
+).<span class="fn">subscribe</span>(data => this.data = data);
+<span class="cm">// Auto-save with debounce on form changes</span>
+this.form.valueChanges.<span class="fn">pipe</span>(
+  <span class="fn">debounceTime</span>(2000),
+  <span class="fn">switchMap</span>(val => this.api.<span class="fn">autosave</span>(val))
+).<span class="fn">subscribe</span>();</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">96</div>
+          <div class="q-txt">How does Angular bootstrapping work?</div>
+        </div>
+        <div class="ans">
+          <p>Angular starts via
+            <code>main.ts</code>. Classic:
+            <code>platformBrowserDynamic().bootstrapModule(AppModule)</code> — compiles and bootstraps AppModule. Modern (standalone):
+            <code>bootstrapApplication(AppComponent, { providers: [...] })</code> — no module needed. Angular then: compiles components (AOT = already done at build time), renders the root component into
+            <code>&lt;app-root&gt;</code> in index.html, starts change detection and routing.
+          </p>
+        </div>
+      </div>
+      <div class="sec-hdr amber" style="margin-top:10px">
+        <div class="sec-ico">🔐</div>
+        <h2>Section 13: Authentication & Security</h2><span class="sec-cnt">Q97 – Q102</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">97</div>
+          <div class="q-txt">Explain the full JWT authentication flow in Angular.</div>
+        </div>
+        <div class="ans">
+          <p>1. User submits login form → Angular sends credentials to auth API. 2. Server validates → returns <strong>JWT access token</strong> + <strong>refresh token</strong>. 3. Angular stores access token (localStorage/memory) and refresh token (HttpOnly cookie or localStorage). 4. HTTP Interceptor attaches:
+            <code>Authorization: Bearer {token}</code> to all API requests. 5. Server validates JWT signature and expiry. 6. On 401 (expired) → Interceptor calls refresh endpoint → gets new access token → retries original request. 7. Logout → clear tokens + call revoke endpoint.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">98</div>
+          <div class="q-txt">OAuth 2.0 and Auth0 integration in Angular?</div>
+        </div>
+        <div class="ans">
+          <p>OAuth 2.0 is an authorization framework — delegates authentication to an identity provider (Google, Azure AD, Auth0). Angular uses the <strong>Authorization Code Flow with PKCE</strong> for SPAs. With Auth0: install
+            <code>@auth0/auth0-angular</code>, configure in AppModule/providers with domain and clientId.
+            <code>AuthModule</code> provides guards and HTTP interceptor for automatic token attachment.
+            <code>AuthService</code> provides login/logout/user profile methods.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">99</div>
+          <div class="q-txt">How to handle token expiry and refresh token rotation?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// In HTTP Interceptor — handle 401 with token refresh</span>
+<span class="fn">catchError</span>(err => {
+  <span class="kw">if</span> (err.status === 401 && !req.url.<span class="fn">includes</span>(<span class="str">'refresh'</span>)) {
+    <span class="kw">return</span> this.auth.<span class="fn">refreshToken</span>().<span class="fn">pipe</span>(
+      <span class="fn">switchMap</span>(tokens => {
+        this.auth.<span class="fn">saveTokens</span>(tokens);
+        <span class="kw">return</span> next(req.<span class="fn">clone</span>({setHeaders:{Authorization:<span class="str">`Bearer ${tokens.access}`</span>}}));
+      })
+    );
+  }
+  <span class="kw">return</span> <span class="fn">throwError</span>(() => err);
+})</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">100</div>
+          <div class="q-txt">Role-based access control — multiple roles for one route?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Route with role data</span>
+{ path: <span class="str">'reports'</span>, component: ReportsComponent,
+  data: { roles: [<span class="str">'admin'</span>, <span class="str">'manager'</span>] },
+  canActivate: [RoleGuard] }
+<span class="cm">// RoleGuard checks user role against route data</span>
+<span class="kw">const</span> allowedRoles = route.data[<span class="str">'roles'</span>] <span class="kw">as</span> string[];
+<span class="kw">return</span> allowedRoles.<span class="fn">includes</span>(this.auth.currentUserRole);</pre>
+        </div>
+      </div>
+      <div class="pf"><span>Section 12: Architecture | Section 13: Authentication | Q87–Q100</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 14: JAVASCRIPT FUNDAMENTALS  Q101–Q114
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 14 • JavaScript Fundamentals</span></div>
+      <div class="sec-hdr amber">
+        <div class="sec-ico">💛</div>
+        <h2>Section 14: JavaScript Fundamentals</h2><span class="sec-cnt">Q101 – Q114</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">101</div>
+          <div class="q-txt">What is closure in JavaScript? Where does it accidentally cause bugs?</div>
+        </div>
+        <div class="ans">
+          <p>A closure is a function that has access to its outer scope's variables even after the outer function has returned. The inner function "closes over" those variables.</p>
+          <pre><span class="kw">function</span> <span class="fn">counter</span>() {
+  <span class="kw">let</span> count = 0;
+  <span class="kw">return</span> () => ++count; <span class="cm">// closes over count</span>
+}
+<span class="cm">// Bug: var in loops — all closures share same variable</span>
+<span class="kw">for</span> (<span class="kw">var</span> i = 0; i &lt; 3; i++) { setTimeout(() => console.log(i), 100); }
+<span class="cm">// Prints 3,3,3 — use let or IIFE to fix</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">102</div>
+          <div class="q-txt">What is hoisting? What is the Temporal Dead Zone (TDZ)?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Hoisting</strong> — JavaScript moves declarations (not initializations) to the top of their scope.
+            <code>var</code> declarations are hoisted and initialized as
+            <code>undefined</code>.
+            <code>function</code> declarations are fully hoisted.
+            <code>let</code> and
+            <code>const</code> are hoisted but NOT initialized. <strong>TDZ (Temporal Dead Zone)</strong> — The period between the start of a block scope and the declaration of a let/const variable. Accessing the variable in TDZ throws a
+            <code>ReferenceError</code>.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">103</div>
+          <div class="q-txt">Difference between var, let, and const?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>var</th>
+              <th>let</th>
+              <th>const</th>
+            </tr>
+            <tr>
+              <td>Scope</td>
+              <td>Function</td>
+              <td>Block</td>
+              <td>Block</td>
+            </tr>
+            <tr>
+              <td>Hoisting</td>
+              <td>Yes (undefined)</td>
+              <td>Yes (TDZ)</td>
+              <td>Yes (TDZ)</td>
+            </tr>
+            <tr>
+              <td>Re-declare</td>
+              <td>Yes</td>
+              <td>No</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Re-assign</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Use today</td>
+              <td>Avoid</td>
+              <td>For changing values</td>
+              <td>Preferred (default)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">104</div>
+          <div class="q-txt">Difference between Arrow Functions and Normal Functions?</div>
+        </div>
+        <div class="ans">
+          <p><strong>this binding</strong> — Arrow functions inherit
+            <code>this</code> from lexical scope (no own this). Normal functions have their own
+            <code>this</code> based on how called. <strong>No own arguments</strong> — Arrow functions have no
+            <code>arguments</code> object. <strong>Cannot be constructor</strong> — Arrow functions can't be used with
+            <code>new</code>. <strong>No prototype</strong> — Arrow functions lack a prototype property. In Angular, always use arrow functions in callbacks to preserve component
+            <code>this</code>.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">105</div>
+          <div class="q-txt">What is event bubbling, capturing, and event delegation?</div>
+        </div>
+        <div class="ans">
+          <p><strong>Bubbling</strong> — Event fires on target, then bubbles up through ancestors. Default behavior. <strong>Capturing</strong> — Event travels from root down to target (useCapture: true). <strong>Event Delegation</strong> — Instead of attaching handlers to many child elements, attach ONE handler to a parent and use
+            <code>event.target</code> to identify the source. Improves performance and handles dynamically added elements.
+          </p>
+          <pre>parentEl.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, e => {
+  <span class="kw">if</span> (e.target.matches(<span class="str">'.item'</span>)) { <span class="fn">handleItemClick</span>(e); }
+});</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">106</div>
+          <div class="q-txt">What is the Event Loop? Explain microtasks vs macrotasks.</div>
+        </div>
+        <div class="ans">
+          <p>The event loop enables JavaScript's non-blocking async behavior on a single thread. <strong>Call Stack</strong> — Executes sync code. <strong>Macrotask queue</strong> (task queue) — setTimeout, setInterval, I/O events. <strong>Microtask queue</strong> — Promise.then, queueMicrotask, MutationObserver. <strong>Order:</strong> All sync code runs → All microtasks drain → ONE macrotask runs → All microtasks drain → Next macrotask. Microtasks always run before the next macrotask.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">107</div>
+          <div class="q-txt">What are pure functions? Have you used them in Angular?</div>
+        </div>
+        <div class="ans">
+          <p>A pure function: (1) Given the same inputs, always returns the same output. (2) Has no side effects (no external state modification). In Angular: <strong>NgRx reducers</strong> must be pure functions. <strong>Pure pipes</strong> rely on pure-function semantics. Using pure functions with immutable data makes OnPush change detection work correctly and makes code predictable and testable.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">108</div>
+          <div class="q-txt">What is prototypal inheritance in JavaScript?</div>
+        </div>
+        <div class="ans">
+          <p>Every JavaScript object has an internal
+            <code>[[Prototype]]</code> link to another object (its prototype). When accessing a property, JS looks on the object first, then walks up the prototype chain until found or reaching null.
+            <code>class</code> syntax is syntactic sugar over prototypal inheritance. Constructor functions create the prototype chain. TypeScript's class inheritance compiles to prototype-based code.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">109</div>
+          <div class="q-txt">What is currying / infinite currying? Explain with use cases.</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Currying: transform f(a,b,c) into f(a)(b)(c)</span>
+<span class="kw">const</span> add = a => b => a + b;
+<span class="fn">add</span>(5)(3); <span class="cm">// 8</span>
+<span class="cm">// Infinite currying:</span>
+<span class="kw">const</span> sum = a => b => b ? <span class="fn">sum</span>(a + b) : a;
+<span class="fn">sum</span>(1)(2)(3)(); <span class="cm">// 6</span>
+<span class="cm">// Use case: reusable, partially-applied functions</span>
+<span class="kw">const</span> multiply = x => y => x * y;
+<span class="kw">const</span> double = <span class="fn">multiply</span>(2);  <span class="cm">// partial application</span>
+[1,2,3].<span class="fn">map</span>(double);          <span class="cm">// [2,4,6]</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">110</div>
+          <div class="q-txt">Spread vs Rest operator? Destructuring?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Spread — expand iterable</span>
+<span class="kw">const</span> merged = [...arr1, ...arr2];  <span class="cm">// arrays</span>
+<span class="kw">const</span> newObj = { ...obj, extra: 1 }; <span class="cm">// objects (immutable update)</span>
+<span class="cm">// Rest — collect remaining</span>
+<span class="kw">function</span> <span class="fn">sum</span>(...nums) { <span class="kw">return</span> nums.<span class="fn">reduce</span>((a,b) => a+b, 0); }
+<span class="cm">// Destructuring</span>
+<span class="kw">const</span> { name, age = 25 } = user;   <span class="cm">// object with default</span>
+<span class="kw">const</span> [first, , third] = arr;      <span class="cm">// array skip element</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">111</div>
+          <div class="q-txt">Why does 0.1 + 0.2 !== 0.3?</div>
+        </div>
+        <div class="ans">
+          <p>JavaScript uses IEEE 754 double-precision floating-point numbers. Some decimal fractions (like 0.1 and 0.2) can't be represented exactly in binary floating-point — they become repeating fractions. When added, the tiny imprecision compounds:
+            <code>0.1 + 0.2 = 0.30000000000000004</code>. Fix: Use
+            <code>Number((0.1 + 0.2).toFixed(2))</code>, multiply to integers for calculation, or use a library like decimal.js for financial calculations.
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">112</div>
+          <div class="q-txt">Generator function output — explain with example.</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">function</span>* <span class="fn">add</span>() {
+  <span class="kw">yield</span> 1;         <span class="cm">// 1st call: {value:1, done:false}</span>
+  <span class="kw">yield</span> [2,3];     <span class="cm">// 2nd call: {value:[2,3], done:false}</span>
+  <span class="kw">return</span> 4;        <span class="cm">// 3rd call: {value:4, done:true}</span>
+}                  <span class="cm">// 4th call: {value:undefined, done:true}</span>
+<span class="kw">const</span> gen = <span class="fn">add</span>();
+gen.<span class="fn">next</span>(); <span class="cm">// {value:1, done:false}</span>
+gen.<span class="fn">next</span>(); <span class="cm">// {value:[2,3], done:false}</span>
+gen.<span class="fn">next</span>(); <span class="cm">// {value:4, done:true}</span>
+gen.<span class="fn">next</span>(); <span class="cm">// {value:undefined, done:true}</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">113</div>
+          <div class="q-txt">Difference between slice and splice?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>slice(start, end)</th>
+              <th>splice(start, deleteCount, ...items)</th>
+            </tr>
+            <tr>
+              <td>Mutates original?</td>
+              <td>No (returns new array)</td>
+              <td>Yes (modifies in place)</td>
+            </tr>
+            <tr>
+              <td>Returns</td>
+              <td>New sub-array</td>
+              <td>Array of removed elements</td>
+            </tr>
+            <tr>
+              <td>Can insert?</td>
+              <td>No</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Use for</td>
+              <td>Copying / extracting</td>
+              <td>Removing/inserting elements</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">114</div>
+          <div class="q-txt">Variable shadowing in JavaScript?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">const</span> x = 10;  <span class="cm">// outer x</span>
+<span class="kw">function</span> <span class="fn">test</span>() {
+  <span class="kw">const</span> x = 20;        <span class="cm">// shadows outer x</span>
+  console.<span class="fn">log</span>(x);     <span class="cm">// 20 — inner x wins</span>
+}
+console.<span class="fn">log</span>(x);  <span class="cm">// 10 — outer unaffected</span>
+<span class="cm">// Shadowing with let vs var can cause subtle bugs in loops</span></pre>
+        </div>
+      </div>
+      <div class="pf"><span>Section 14: JavaScript Fundamentals | Q101–Q114</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     SECTION 15: TYPESCRIPT & CODING CHALLENGES  Q115–Q128
+══════════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="ph"><span class="ph-logo">⚡ Angular Interview Guide</span><span class="ph-section">Section 15 • TypeScript & Coding Challenges</span></div>
+      <div class="sec-hdr green">
+        <div class="sec-ico">💻</div>
+        <h2>Section 15: TypeScript & Coding Challenges</h2><span class="sec-cnt">Q115 – Q128</span>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">115</div>
+          <div class="q-txt">Difference between any and unknown in TypeScript? What about generics?</div>
+        </div>
+        <div class="ans">
+          <p>
+            <code>any</code> — Opts out of type checking entirely. Any operation is allowed — unsafe.
+            <code>unknown</code> — Type-safe counterpart. You must perform type checks before using the value. <strong>Generics</strong> — Type variables that make functions/classes reusable across types while preserving type safety:
+            <code>function identity&lt;T&gt;(arg: T): T { return arg; }</code>. Variance in TS: Covariance (subtype is assignable), Contravariance (params), Invariance (mutable generics).
+          </p>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">116</div>
+          <div class="q-txt">TypeScript Interfaces, optional properties, Partial&lt;T&gt;?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">interface</span> User {
+  id: <span class="kw">number</span>;
+  name: <span class="kw">string</span>;
+  email?: <span class="kw">string</span>;  <span class="cm">// optional</span>
+}
+<span class="cm">// Utility types:</span>
+<span class="kw">type</span> PartialUser = Partial&lt;User&gt;;    <span class="cm">// all props optional</span>
+<span class="kw">type</span> ReadonlyUser = Readonly&lt;User&gt;;  <span class="cm">// all props readonly</span>
+<span class="kw">type</span> PickUser = Pick&lt;User, <span class="str">'id'|'name'</span>&gt;; <span class="cm">// subset</span>
+<span class="kw">type</span> OmitEmail = Omit&lt;User, <span class="str">'email'</span>&gt;; <span class="cm">// exclude field</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">117</div>
+          <div class="q-txt">parseInt('08', 10) vs parseInt('08') — what is the output?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="fn">parseInt</span>(<span class="str">'08'</span>)     <span class="cm">// 8 (modern JS — defaults to decimal)</span>
+<span class="fn">parseInt</span>(<span class="str">'08'</span>, 10)  <span class="cm">// 8 (explicit base 10 — always safe)</span>
+<span class="fn">parseInt</span>(<span class="str">'08'</span>, 8)   <span class="cm">// 0 (octal — '8' is invalid in base 8)</span>
+<span class="fn">parseInt</span>(<span class="str">'010'</span>)    <span class="cm">// 10 (modern), was 8 in older engines</span>
+<span class="cm">// Best practice: always pass radix as second argument!</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">118</div>
+          <div class="q-txt">Write code to find missing numbers from an array like [1,2,4,5,7,8,9]?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">function</span> <span class="fn">findMissing</span>(arr: <span class="kw">number</span>[]) {
+  <span class="kw">const</span> max = Math.<span class="fn">max</span>(...arr);
+  <span class="kw">const</span> set = <span class="kw">new</span> Set(arr);
+  <span class="kw">const</span> missing = [];
+  <span class="kw">for</span> (<span class="kw">let</span> i = 1; i &lt;= max; i++) {
+    <span class="kw">if</span> (!set.<span class="fn">has</span>(i)) missing.<span class="fn">push</span>(i);
+  }
+  <span class="kw">return</span> missing;  <span class="cm">// [3, 6]</span>
+}</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">119</div>
+          <div class="q-txt">Find duplicate values in a string like "program"?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">function</span> <span class="fn">findDuplicates</span>(str: <span class="kw">string</span>) {
+  <span class="kw">const</span> freq: Record&lt;<span class="kw">string</span>, <span class="kw">number</span>&gt; = {};
+  <span class="kw">for</span> (<span class="kw">const</span> ch <span class="kw">of</span> str) freq[ch] = (freq[ch] || 0) + 1;
+  <span class="kw">return</span> Object.<span class="fn">entries</span>(freq)
+    .<span class="fn">filter</span>(([_, count]) => count > 1)
+    .<span class="fn">map</span>(([ch]) => ch);
+}
+<span class="fn">findDuplicates</span>(<span class="str">'program'</span>); <span class="cm">// ['r', 'g'] (r×2, g×2... wait: p,r,o,g,r,a,m → r twice)</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">120</div>
+          <div class="q-txt">Flatten a nested array: [1, [2, [3, [4]], 5]] → [1, 2, 3, 4, 5]?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">// Method 1: flat() with Infinity depth</span>
+[1, [2, [3, [4]], 5]].<span class="fn">flat</span>(Infinity);  <span class="cm">// [1,2,3,4,5]</span>
+<span class="cm">// Method 2: Recursive</span>
+<span class="kw">function</span> <span class="fn">flatten</span>(arr: any[]): any[] {
+  <span class="kw">return</span> arr.<span class="fn">reduce</span>((flat, item) =>
+    flat.<span class="fn">concat</span>(Array.<span class="fn">isArray</span>(item) ? <span class="fn">flatten</span>(item) : item), []);
+}</pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">121</div>
+          <div class="q-txt">Remove duplicate objects from array by combination of empId and name?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">const</span> employees = [
+  { empId: 1, name: <span class="str">'Alice'</span>, city: <span class="str">'NY'</span> },
+  { empId: 1, name: <span class="str">'Alice'</span>, city: <span class="str">'LA'</span> },  <span class="cm">// duplicate</span>
+  { empId: 2, name: <span class="str">'Bob'</span>, city: <span class="str">'NY'</span> }
+];
+<span class="kw">const</span> unique = [...<span class="kw">new</span> Map(
+  employees.<span class="fn">map</span>(e => [`${e.empId}_${e.name}`, e])
+).<span class="fn">values</span>()];
+<span class="cm">// Result: [{empId:1,name:'Alice',city:'NY'}, {empId:2,...}]</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">122</div>
+          <div class="q-txt">Chunk an array into fixed sizes: [42,10,19,6,8,7] with size 3?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">function</span> <span class="fn">chunk</span>&lt;T&gt;(arr: T[], size: <span class="kw">number</span>): T[][] {
+  <span class="kw">const</span> result: T[][] = [];
+  <span class="kw">for</span> (<span class="kw">let</span> i = 0; i &lt; arr.length; i += size) {
+    result.<span class="fn">push</span>(arr.<span class="fn">slice</span>(i, i + size));
+  }
+  <span class="kw">return</span> result;
+}
+<span class="fn">chunk</span>([42,10,19,6,8,7], 3); <span class="cm">// [[42,10,19],[6,8,7]]</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">123</div>
+          <div class="q-txt">Replace repeated values with 1: [1,2,3,2,3,4] → [1,1,1,1,1,4]?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">function</span> <span class="fn">replaceRepeated</span>(arr: <span class="kw">number</span>[]) {
+  <span class="kw">const</span> seen = <span class="kw">new</span> Set&lt;<span class="kw">number</span>&gt;();
+  <span class="kw">return</span> arr.<span class="fn">map</span>(n => {
+    <span class="kw">if</span> (seen.<span class="fn">has</span>(n)) <span class="kw">return</span> 1;
+    seen.<span class="fn">add</span>(n);
+    <span class="kw">return</span> n;
+  });
+}
+<span class="fn">replaceRepeated</span>([1,2,3,2,3,4]); <span class="cm">// [1,2,3,1,1,4]</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">124</div>
+          <div class="q-txt">Find the second highest salary using SQL CTE?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm">-- Using CTE (Common Table Expression)</span>
+<span class="kw">WITH</span> RankedSalaries <span class="kw">AS</span> (
+  <span class="kw">SELECT</span> Salary,
+         <span class="fn">DENSE_RANK</span>() OVER (<span class="kw">ORDER BY</span> Salary <span class="kw">DESC</span>) <span class="kw">AS</span> Rank
+  <span class="kw">FROM</span> Employees
+)
+<span class="kw">SELECT</span> Salary <span class="kw">FROM</span> RankedSalaries <span class="kw">WHERE</span> Rank = 2;
+<span class="cm">-- CTE = temporary named result set, readable alternative to subqueries</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">125</div>
+          <div class="q-txt">Prototype chain question: delete x.p — what does console.log(x.p) print?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">function</span> <span class="fn">A</span>() {}
+A.prototype.p = 1;       <span class="cm">// prototype property p = 1</span>
+<span class="kw">const</span> x = <span class="kw">new</span> A();
+x.p = 2;                 <span class="cm">// own property p = 2 (shadows prototype)</span>
+<span class="kw">delete</span> x.p;             <span class="cm">// deletes OWN property only</span>
+console.log(x.p);        <span class="cm">// 1 (falls back to prototype.p)</span>
+<span class="kw">delete</span> A.prototype.p;   <span class="cm">// deletes prototype property</span>
+console.log(x.p);        <span class="cm">// undefined (no more prototype.p)</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">126</div>
+          <div class="q-txt">Write code for method overriding in TypeScript (OOP)?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="kw">class</span> <span class="fn">Animal</span> {
+  <span class="fn">speak</span>() { <span class="kw">return</span> <span class="str">'Some sound'</span>; }
+}
+<span class="kw">class</span> <span class="fn">Dog</span> <span class="kw">extends</span> Animal {
+  <span class="kw">override</span> <span class="fn">speak</span>() {   <span class="cm">// override keyword (TS 4.3+)</span>
+    <span class="kw">return</span> <span class="str">'Woof!'</span>;     <span class="cm">// overrides parent method</span>
+  }
+}
+<span class="kw">const</span> d = <span class="kw">new</span> Dog();
+d.<span class="fn">speak</span>();  <span class="cm">// 'Woof!'</span>
+<span class="kw">super</span>.<span class="fn">speak</span>(); <span class="cm">// access parent: 'Some sound'</span></pre>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">127</div>
+          <div class="q-txt">Difference between WHERE and HAVING in SQL?</div>
+        </div>
+        <div class="ans">
+          <table class="diff">
+            <tr>
+              <th></th>
+              <th>WHERE</th>
+              <th>HAVING</th>
+            </tr>
+            <tr>
+              <td>Filters</td>
+              <td>Individual rows (before grouping)</td>
+              <td>Groups (after GROUP BY)</td>
+            </tr>
+            <tr>
+              <td>Use with aggregates</td>
+              <td>No</td>
+              <td>Yes (SUM, COUNT, AVG...)</td>
+            </tr>
+            <tr>
+              <td>Example</td>
+              <td>WHERE salary > 50000</td>
+              <td>HAVING COUNT(*) > 5</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="qa">
+        <div class="q-head">
+          <div class="q-num">128</div>
+          <div class="q-txt">Git commands: create branch, switch branch, cherry-pick?</div>
+        </div>
+        <div class="ans">
+          <pre><span class="cm"># Create and switch to new branch</span>
+git checkout -b feature/my-feature
+git switch -c feature/my-feature   <span class="cm"># modern syntax</span>
+<span class="cm"># Switch to existing branch</span>
+git checkout main
+git switch main
+<span class="cm"># Cherry-pick: apply a specific commit from another branch</span>
+git cherry-pick &lt;commit-hash&gt;
+<span class="cm"># Useful for: hotfix on main, backporting a specific fix</span></pre>
+        </div>
+      </div>
+      <div class="pf"><span>Section 15: TypeScript & Coding Challenges | Q115–Q128</span><span>Curated by Kishore</span></div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════
+     CREDITS PAGE
+══════════════════════════════════════════════════════════════ -->
+    <div class="page credits">
+      <div class="cred-av">👨‍💻</div>
+      <div class="cred-name">Kishore</div>
+      <div class="cred-subtitle">Angular Developer · Interview Preparation Enthusiast</div>
+      <div class="cred-links">
+        <a class="cred-link" href="https://www.linkedin.com/in/kishore" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn Profile
+    </a>
+        <a class="cred-link" href="https://github.com/kishore" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+      </div>
+      <div class="cred-badge">
+        <span class="cred-b">128 Unique Questions</span>
+        <span class="cred-b">15 Topic Areas</span>
+        <span class="cred-b">Angular 17–20</span>
+        <span class="cred-b">MNC Interview Ready</span>
+      </div>
+      <div class="cred-desc">
+        This guide was compiled from 20+ real MNC interview experience posts shared on LinkedIn by developers
+        who interviewed at Tech Mahindra, LTIMindtree, and other top Indian MNCs.
+        Questions were extracted, deduplicated, categorized, and answered for comprehensive interview preparation.
+        All questions are unique — no repetitions.
+      </div>
+      <div class="cred-desc" style="margin-top:12px; font-size:10px; color:rgba(255,255,255,.6)">
+        📌 Topics: Angular Core • Change Detection • Signals • RxJS • NgRx • Forms
+        <br>
+        Routing • DI • HTTP Interceptors • Auth • Performance • JS Fundamentals • TypeScript
+      </div>
+      <div class="cred-foot">Angular Interview Questions Guide • 2025 Edition • Curated with ❤️ by Kishore</div>
+    </div>
+  </body>
+</html>
