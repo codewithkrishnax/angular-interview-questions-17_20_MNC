@@ -5,6 +5,8 @@
 **🚀 MNC Interview Preparation Guide · 2026 Edition**
 *Curated by Code with Krishna*
 
+[Preview Angular Interview Questions & Answers Site](https://codewithkrishnax.github.io/angular-interview-questions-17_20_MNC/)
+
 **128** Unique Questions · **15** Topic Areas · **100%** Real MNC Asked
 
 `Angular 17+` `Signals` `RxJS / Operators` `NgRx` `Change Detection` `HTTP Interceptors` `TypeScript` `Performance` `JWT / Auth` `Micro Frontend` `JavaScript Core` `Coding Challenges` `Standalone Architecture` `SSR / Universal`
